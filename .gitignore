@@ -1,0 +1,31 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+
+# Data and generated artifacts
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+evaluation/reports/*
+!evaluation/reports/.gitkeep
+models/
+storage/
+qdrant_storage/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+

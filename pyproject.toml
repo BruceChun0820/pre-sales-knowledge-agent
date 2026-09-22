@@ -1,0 +1,19 @@
+[project]
+name = "pre-sales-knowledge-agent"
+version = "0.0.0"
+description = "Evaluable RAG and agent assistant for pre-sales knowledge and solution workflows"
+readme = "README.md"
+requires-python = ">=3.13,<3.15"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
