@@ -2,7 +2,7 @@
 
 售前知识与方案智能助手：一个面向企业售前团队的、可评估的 RAG + Agent 项目。项目将公开资料与自建模拟售前文档转化为可检索知识库，支持带来源的问答、历史方案检索、跨方案比较、文档总结和 Proposal 大纲辅助生成。
 
-> 当前状态：**Phase 1 — Document Ingestion + Vector DB / PLANNED**。Phase 0 文档与架构基线已完成；Phase 1 的任务定义和 Dev/QA 交接已就绪，等待用户授权开发。尚未安装项目依赖、启动 Qdrant、调用 LLM，或实现业务代码。
+> 当前状态：**Phase 1 — Document Ingestion + Vector DB / PLANNED**。TASK-01 的基础依赖、项目 `.venv`、锁定文件和兼容性验证已完成；Qdrant 服务与业务代码尚未实现，embedding CPU 路径仍按 TASK-05 单独验证。
 
 ## 1. 项目背景
 

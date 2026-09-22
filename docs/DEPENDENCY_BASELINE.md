@@ -2,10 +2,12 @@
 
 ## Status
 
-Phase 1 `TASK-01` is partially complete:
+Phase 1 `TASK-01` base environment verification is complete:
 
 - Base project and development dependencies are configured and installed in `.venv`.
 - Python 3.14.4 is usable for the current Phase 1 base dependency set.
+- The committed lock file matches the installed project environment.
+- Direct dependency imports, PyMuPDF parsing, and the in-memory Qdrant client smoke test pass.
 - Embedding dependencies are explicitly isolated as an optional CPU path.
 - Sentence-Transformers/PyTorch CPU installation is not yet complete because the PyTorch CPU wheel download was interrupted by a network stall.
 - No CUDA or NVIDIA package was installed.
@@ -23,6 +25,9 @@ This is a dependency/environment document, not a business implementation.
 | Python | 3.14.4 |
 | Project environment | `.venv` |
 | Qdrant | Client configured; server not started in this task |
+| Docker Engine | 29.8.1 |
+| Docker Compose | v5.5.1 |
+| Qdrant image | Not selected or pulled; pinned image is a TASK-06 deliverable |
 
 ## Configured Dependency Groups
 
@@ -61,7 +66,28 @@ The exact transitive environment is frozen in `requirements-phase1.lock`.
 | pytest-cov | 6.3.0 |
 | ruff | 0.16.8 |
 
-Verification imports for the installed base group passed. `torch` and `sentence-transformers` are currently not installed.
+`requirements-phase1.lock` contains project dependencies only; virtual-environment tooling such as `pip` is intentionally not part of the project dependency graph.
+
+## Compatibility Verification
+
+All checks below ran from the project root with `.venv/bin/python` on the Ubuntu VM:
+
+| Check | Result |
+|---|---|
+| Clean temporary environment installed from `requirements-phase1.lock` | PASS |
+| `pip freeze` compared with `requirements-phase1.lock` | PASS |
+| Pydantic and pydantic-settings imports | PASS |
+| PyMuPDF import and in-memory PDF text extraction | PASS |
+| python-docx import | PASS |
+| Qdrant client import and in-memory collection listing | PASS |
+| Python 3.14.4 | PASS for the installed base dependency set |
+| Docker daemon | AVAILABLE |
+| Ruff lint | PASS |
+| Ruff format check | PASS |
+| Pytest | 3 passed |
+| CPU embedding runtime | DEFERRED; `torch` and `sentence-transformers` not installed |
+
+The Qdrant server image is intentionally not selected in TASK-01. TASK-06 must define and pin the image in Docker Compose before server integration begins.
 
 ## Reproduction Commands
 
