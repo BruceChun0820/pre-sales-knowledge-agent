@@ -19,7 +19,8 @@
 ```text
 PM defines Phase and handoffs
         -> Dev implements approved Tasks
-        -> Dev submits PR/evidence
+        -> Dev pushes task branch to approved remote
+        -> Dev opens remote PR/evidence
         -> PM scope/architecture review
         -> QA executes acceptance plan
         -> Dev fixes failed criteria on same scope
@@ -76,15 +77,17 @@ docs/phase-01-clarify-metadata-contract
 
 1. 从最新 `dev` 创建 task branch；
 2. 实现指定 Task，提交测试和文档；
-3. PR target 为 `dev`；
-4. Dev 自检 Quality Gates；
-5. PM 检查 scope/architecture；
-6. QA 按 handoff 验收；
-7. 未通过则在同一 scope 修复并 re-test；
-8. Phase 全部 QA PASSED 后，由 PM 批准 `dev -> main`；
-9. 不允许绕过 QA 或直接 push feature commit 到 `main`。
+3. 确认 `origin` 指向用户批准的远程私有仓库；缺失或错误时停止并反馈 PM；
+4. 将 task branch 推送到 `origin`，设置 upstream；
+5. 创建远程 PR，source 为 task branch，target 必须为 `dev`；
+6. Dev 自检 Quality Gates，并在 PR 描述中提交证据；
+7. PM 检查 scope/architecture 和 PR metadata；
+8. QA 通过远程 PR 对应 commit 按 handoff 验收；
+9. 未通过则在同一 task branch 修复并 push，QA 对新 commit re-test；
+10. Phase 全部 QA PASSED 后，由 PM 批准 `dev -> main` 的独立 PR；
+11. 不允许绕过 QA、直接 push feature commit 到 `main`、或由 Dev 自行 merge。
 
-当前仓库只建立本地分支；未经用户确认不得创建或公开 GitHub/GitLab 等远程仓库。
+远程仓库必须是已批准的 repository。Dev 不得在 Task 流程中创建新仓库、改变仓库可见性或公开代码。
 
 ## 5. Commit and PR Requirements
 
@@ -109,17 +112,33 @@ Commit 应：
 
 每个 Dev PR 必须说明：
 
+- 远程 PR URL；
+- remote repository full name；
+- source branch、target branch（必须为 `dev`）；
+- PR head commit SHA；
 - Phase 与 Task IDs；
 - 实际变更文件；
 - Acceptance Criteria 对照；
 - 执行的测试与原始结果摘要；
 - lint/format/type checks；
+- 远程 CI/check 状态与链接（如仓库已配置）；
 - 数据、配置或架构影响；
 - 已知限制与未完成项；
 - 是否存在 Scope/Architecture deviation；
 - 回滚方式。
 
 模板见 `docs/pr/PR_TEMPLATE.md`。
+
+### 5.3 Remote PR rules
+
+- PR 必须从远程可访问的 task branch 创建，不能只提供本地 commit hash。
+- PR target 必须是 `dev`；误指向 `main` 的 PR 不进入 QA。
+- PR 必须锁定/显示被 QA 验收的 head commit；Dev push 新 commit 后必须通知 QA 重新确认。
+- PR 描述必须保留 Task、AC、测试命令和已知限制；不能用“已测试”替代结果。
+- GitHub Actions 或其他远程检查失败时，PR 状态为 `NOT READY FOR QA`，除非 PM 明确记录豁免。
+- QA 只验收 PR 当前 head，不验收开发者本地未 push 的改动。
+- PM 只在 QA PASSED 后批准合并；Dev 不得自批准、自合并或删除审计证据。
+- Phase 完成后，`dev -> main` 使用独立 PR，必须引用 Phase QA 结果和 PM 接受决定。
 
 ## 6. Scope and Change Control
 
@@ -163,7 +182,7 @@ Task 只有满足以下条件才可进入开发：
 
 Dev 在交给 QA 前必须提供：
 
-- PR/commit reference；
+- 远程 PR URL、repository、source/target branch 和当前 head SHA；
 - Task IDs 与变更摘要；
 - 所有 required automated checks 已通过；
 - 测试命令和结果；
@@ -210,5 +229,4 @@ QA finding 至少包含：
 - 不提交模型文件、Qdrant storage、原始大文件和生成缓存；
 - 文档内容按不可信输入处理；
 - 无 PM 批准不得增加 shell、任意 HTTP、CRM、文件写入等 Agent tools；
-- 未经用户确认不得创建远程 repository 或对外发布。
-
+- 不得创建新远程 repository、改变可见性或对外发布；只能使用已批准的远程仓库。

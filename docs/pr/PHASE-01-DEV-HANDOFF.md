@@ -64,6 +64,8 @@ Do not create API, Agent, prompt, tool-calling, CRM, frontend, or unrelated infr
 ## Technical Constraints
 
 - Work on a task/feature branch created from `dev`; target `dev`, never `main`.
+- `origin` must exist and point to the PM-approved remote repository; if it is missing/wrong, stop and report.
+- Push the task branch to `origin` and submit a remote PR targeting `dev`; a local-only commit is not a valid handoff.
 - Use an isolated environment; do not install into system Python.
 - TASK-01 is a stop gate: report Python 3.14 incompatibility before installing another interpreter.
 - Domain contracts cannot import Qdrant, parser, LangChain, or LangGraph SDK types.
@@ -126,7 +128,7 @@ Dev must not:
 - implement question answering, citation generation, API endpoints, UI, Agent, tools, ReAct, memory, or CRM features;
 - add Java, Kafka, Redis, Kubernetes, microservices, multi-agent, or unrelated services;
 - enable OCR, hybrid search, sparse vectors, or reranking;
-- create or publish a remote Git repository;
+- create a new remote repository, change repository visibility, or publish code outside the approved remote repository;
 - push/commit directly to `main`;
 - modify Scope, architecture, metadata contracts, or Acceptance Criteria without PM review;
 - use real employer/customer material or reproduce private schemas/Skills;
@@ -152,3 +154,4 @@ The report must include exact error/evidence, affected Task/AC, options, and rec
 
 Dev work is complete only when TASK-01–08 outputs exist, all Quality Gates pass, the PR evidence package is complete, and status can legitimately move to `READY FOR QA`. Dev completion is not Phase acceptance.
 
+The PR evidence package must include a reachable remote PR URL, approved repository name, source task branch, target `dev`, current head SHA, and remote check status. QA must not begin against an unpushed local commit.

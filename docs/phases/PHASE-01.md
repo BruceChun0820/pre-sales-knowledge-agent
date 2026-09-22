@@ -434,6 +434,7 @@ Make the Phase independently reproducible and ready for QA.
 | AC-P1-14 | `pytest` completes with zero failed/error tests; lint and format checks exit 0. |
 | AC-P1-15 | Repository scan finds no API keys, passwords, real company/customer data, model binaries, or Qdrant runtime storage. |
 | AC-P1-16 | No LLM call, FastAPI endpoint, LangGraph/Agent code, OCR, hybrid retrieval, reranker, or out-of-scope infrastructure is introduced. |
+| AC-P1-17 | Dev submits a reachable remote PR in the approved repository with source task branch, target `dev`, matching tested head SHA, Task/AC evidence, and no self-merge. |
 
 Any failed criterion means the Phase is not QA PASSED. AC-P1-09 may intentionally produce `BLOCKED`, not a silent fallback.
 
@@ -455,6 +456,8 @@ Before `READY FOR QA`, Dev must provide commands and passing evidence for:
 - Docker image is pinned and persistence is tested;
 - README/setup/decision/benchmark documentation matches implementation;
 - PR contains an AC-by-AC evidence table;
+- remote PR URL is reachable, targets `dev`, and its head SHA matches the tested commit;
+- remote CI/check results are included when the repository provides them;
 - no Blocker/Major finding remains open.
 
 ## Required Evidence Package

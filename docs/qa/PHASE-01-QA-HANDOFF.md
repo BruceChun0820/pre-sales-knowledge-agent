@@ -9,6 +9,9 @@ Verify that Phase 01 builds a deterministic, traceable, persistent document inde
 QA begins only when Dev provides:
 
 - PR/commit reference targeting `dev`;
+- reachable remote PR URL in the approved repository;
+- source task branch, target branch `dev`, and current PR head SHA;
+- remote CI/check status, if configured;
 - implemented Task IDs;
 - clean environment/setup instructions;
 - all automated Quality Gates reported PASS;
@@ -51,6 +54,7 @@ QA must record Python, dependency lock, Docker, Qdrant image, commit, corpus ver
 | QA-P1-14 | AC-P1-14 | Run documented format, lint, unit, integration, golden, and acceptance commands. | Every command exits 0 and test failures/errors equal 0. |
 | QA-P1-15 | AC-P1-15 | Scan tracked files for secrets/private data and prohibited artifacts. | No key/password/private data/model binary/cache/Qdrant storage is tracked. |
 | QA-P1-16 | AC-P1-16 | Inspect dependency tree and changed files for out-of-scope components. | No LLM/FastAPI/LangGraph/Agent/OCR/hybrid/reranker/unapproved infrastructure is introduced. |
+| QA-P1-17 | AC-P1-17 | Open the remote PR and compare its source/target/head metadata with the Dev handoff and checkout. | PR is reachable, targets `dev`, source branch is the task branch, head SHA matches the tested commit, and Dev has not merged it. |
 
 ## Additional Negative Tests
 
@@ -78,6 +82,7 @@ QA verifies, rather than assumes, the Dev evidence:
 - confirm documentation matches actual commands;
 - verify `.gitignore` and tracked-file list;
 - confirm `main` was not used for feature development.
+- confirm QA is testing the remote PR head, not an unpushed local commit.
 
 ## Evidence Required From QA
 
@@ -109,9 +114,9 @@ If the requirement is defective, QA reports it to PM. PM updates the authoritati
 - Do not use real company/customer documents or credentials.
 - Do not install unapproved services to make tests pass.
 - Do not merge the PR or bypass PM acceptance.
+- Do not accept a local-only commit or a PR targeting `main` as a Phase 1 Dev handoff.
 - Do not test against or delete unrelated Qdrant data.
 
 ## Phase Exit Recommendation
 
-After QA-P1-01 through QA-P1-16 pass, QA submits the evidence report to PM. QA approval does not merge `dev` to `main`; PM performs the final scope/architecture review and accepts the Phase.
-
+After QA-P1-01 through QA-P1-17 pass, QA submits the evidence report to PM. QA approval does not merge `dev` to `main`; PM performs the final scope/architecture review and accepts the Phase.
