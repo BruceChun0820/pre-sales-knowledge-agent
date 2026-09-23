@@ -6,7 +6,7 @@
 - Branch: `feature/phase-02-dev1-retrieval-evidence`
 - Accepted base: `268c6674771984d2b844195f291263ae265b342d`
 - Commits: `bb20851095fe8a449a3d10cad9f062ca10ed8b75` (retrieval); `422fc12` (preserve Qdrant ordering follow-up)
-- PR: pending final submission.
+- PR: https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/12 (open; targets main; not merged).
 
 ## Acceptance evidence
 

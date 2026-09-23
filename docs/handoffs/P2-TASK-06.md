@@ -9,7 +9,7 @@
 - Dataset: `evaluation/datasets/phase2_retrieval_v1.json`
 - Runner: `evaluation/run_phase2_retrieval.py`
 - Report: `evaluation/reports/phase2_retrieval_baseline_v1.json`
-- PR: pending final submission.
+- PR: https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/12 (open; targets main; not merged).
 
 ## Reproduction and results
 

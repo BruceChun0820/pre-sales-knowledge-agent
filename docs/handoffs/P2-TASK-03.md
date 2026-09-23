@@ -6,7 +6,7 @@
 - Branch: `feature/phase-02-dev1-retrieval-evidence`
 - Accepted base: `268c6674771984d2b844195f291263ae265b342d`
 - Commit: `ef1b95e9f9382bb6601816d4c5d790e227873558`
-- PR: pending final submission.
+- PR: https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/12 (open; targets main; not merged).
 
 ## Acceptance evidence
 
