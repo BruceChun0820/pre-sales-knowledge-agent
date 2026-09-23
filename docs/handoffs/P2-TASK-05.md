@@ -4,8 +4,8 @@
 
 - Branch: feature/phase-02-dev2-generation-api
 - Base: 268c6674771984d2b844195f291263ae265b342d
-- Head: recorded in the implementation PR after commit.
-- PR: recorded after push; target main.
+- Implementation commit: 378635981e5c11ace228efe9efb56275212dabf9.
+- PR: https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/11 (target main).
 
 ## Scope and Files
 
