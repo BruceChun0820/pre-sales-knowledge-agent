@@ -6,11 +6,12 @@ Phase 1 `TASK-01` base environment verification is complete:
 
 - Base project and development dependencies are configured and installed in `.venv`.
 - Python 3.14.4 is usable for the current Phase 1 base dependency set.
-- The committed lock file matches the installed project environment.
+- The committed base, CPU, and embedding lock files together match the installed project environment.
 - Direct dependency imports, PyMuPDF parsing, and the in-memory Qdrant client smoke test pass.
-- Embedding dependencies are explicitly isolated as an optional CPU path.
-- Sentence-Transformers/PyTorch CPU installation is not yet complete because the PyTorch CPU wheel download was interrupted by a network stall.
-- No CUDA or NVIDIA package was installed.
+- Embedding dependencies remain isolated as an optional CPU path with an exact lock.
+- CPU-only PyTorch 2.14.0 and Sentence-Transformers 5.7.0 are installed and verified.
+- Both pinned TASK-05 candidates completed on the same synthetic bilingual evaluation set.
+- No CUDA or NVIDIA package was installed; `torch.cuda.is_available()` is `False`.
 
 This is a dependency/environment document, not a business implementation.
 
@@ -23,6 +24,8 @@ This is a dependency/environment document, not a business implementation.
 | Memory | 15 GiB |
 | GPU | None detected |
 | Python | 3.14.4 |
+| PyTorch | 2.14.0+cpu |
+| Sentence-Transformers | 5.7.0 |
 | Project environment | `.venv` |
 | Qdrant | Client configured; server not started in this task |
 | Docker Engine | 29.8.1 |
@@ -84,8 +87,8 @@ All checks below ran from the project root with `.venv/bin/python` on the Ubuntu
 | Docker daemon | AVAILABLE |
 | Ruff lint | PASS |
 | Ruff format check | PASS |
-| Pytest | 3 passed |
-| CPU embedding runtime | DEFERRED; `torch` and `sentence-transformers` not installed |
+| Pytest | 42 passed |
+| CPU embedding runtime | PASS; both pinned candidates completed with CUDA disabled |
 
 The Qdrant server image is intentionally not selected in TASK-01. TASK-06 must define and pin the image in Docker Compose before server integration begins.
 
@@ -107,7 +110,8 @@ Only run this after the base environment is healthy:
 
 ```bash
 .venv/bin/python -m pip install -r requirements-embedding-cpu.txt
-.venv/bin/python -m pip install -e ".[embedding]"
+.venv/bin/python -m pip install -r requirements-embedding.lock
+.venv/bin/python -m pip install -e . --no-deps
 ```
 
 Verify before using a model:
@@ -118,7 +122,9 @@ Verify before using a model:
 
 Expected result: import succeeds and `torch.cuda.is_available()` is `False`.
 
-Do **not** run plain `pip install sentence-transformers` first. On this VM it may pull CUDA/NVIDIA packages. If the CPU wheel cannot be downloaded, stop TASK-05 and report the exact network error; do not silently fall back to a CUDA build.
+`requirements-embedding.lock` pins the optional model-runtime packages. Model weights remain in the user cache and must never be committed. If Hugging Face access requires a local proxy, ensure the shell inherits the configured proxy before running the benchmark.
+
+Do **not** run plain `pip install sentence-transformers` first. On this VM it may pull CUDA/NVIDIA packages. If the CPU wheel cannot be downloaded, report the exact error; do not silently fall back to a CUDA build.
 
 ## Dependency Policy
 
@@ -143,13 +149,13 @@ The VM has no GPU, but the default Linux resolution of Sentence-Transformers sel
 
 ### Decision
 
-Use option 2. Keep Sentence-Transformers optional, use `requirements-embedding-cpu.txt` to force the CPU wheel, and keep the base Phase 1 environment free of model-runtime dependencies until that CPU path is verified.
+Use option 2. Keep Sentence-Transformers optional, install the CPU wheel first, and reproduce the exact optional runtime from `requirements-embedding.lock`.
 
 ### Reason
 
-It respects the VM hardware constraint, prevents unnecessary CUDA downloads, and preserves the intended BGE/Sentence-Transformers evaluation path.
+It respects the VM hardware constraint, prevents unnecessary CUDA downloads, and preserves the measured MiniLM/BGE-M3 evaluation path.
 
 ### Trade-off
 
-Embedding benchmark setup has one additional installation step and is currently blocked by the PyTorch wheel download. The base parsing/Qdrant/test work can proceed independently without hiding that blocker.
+Embedding setup has an additional installation step and downloads large model artifacts into the user cache. The base dependency set remains lightweight and independently reproducible.
 

@@ -24,6 +24,8 @@ def test_settings_load_environment_values(monkeypatch: pytest.MonkeyPatch) -> No
     monkeypatch.setenv("MAX_FILE_SIZE_MB", "12")
     monkeypatch.setenv("QDRANT_API_KEY", "")
     monkeypatch.setenv("EMBEDDING_MODEL", "baseline-model")
+    monkeypatch.setenv("EMBEDDING_MODEL_REVISION", "revision-1")
+    monkeypatch.setenv("EMBEDDING_DIMENSION", "384")
 
     settings = Settings(_env_file=None)
 
@@ -32,6 +34,8 @@ def test_settings_load_environment_values(monkeypatch: pytest.MonkeyPatch) -> No
     assert settings.max_file_size_mb == 12
     assert settings.qdrant_api_key is None
     assert settings.embedding_model == "baseline-model"
+    assert settings.embedding_model_revision == "revision-1"
+    assert settings.embedding_dimension == 384
 
 
 def test_settings_reject_invalid_controlled_values(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -54,4 +58,10 @@ def test_settings_reject_inconsistent_chunk_limits(monkeypatch: pytest.MonkeyPat
     monkeypatch.setenv("CHUNK_TARGET_TOKENS", "512")
     monkeypatch.setenv("CHUNK_OVERLAP_TOKENS", "512")
     with pytest.raises(ValidationError):
+        Settings(_env_file=None)
+
+
+def test_settings_require_complete_embedding_metadata(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("EMBEDDING_MODEL", "incomplete-model")
+    with pytest.raises(ValidationError, match="must be configured together"):
         Settings(_env_file=None)

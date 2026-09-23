@@ -27,6 +27,8 @@ class Settings(BaseSettings):
     qdrant_collection: str = Field(default="pre_sales_knowledge", min_length=1, max_length=128)
     tenant_id: Literal["demo"] = "demo"
     embedding_model: str | None = None
+    embedding_model_revision: str | None = None
+    embedding_dimension: int | None = Field(default=None, ge=1)
     parser_version: str = Field(default="parser-v1", min_length=1, max_length=64)
     cleaner_version: str = Field(default="cleaner-v1", min_length=1, max_length=64)
     chunker_version: str = Field(default="chunker-v1", min_length=1, max_length=64)
@@ -38,6 +40,18 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_chunking_limits(self) -> Settings:
+        embedding_values = (
+            self.embedding_model,
+            self.embedding_model_revision,
+            self.embedding_dimension,
+        )
+        if any(value is not None for value in embedding_values) and not all(
+            value is not None for value in embedding_values
+        ):
+            raise ValueError(
+                "embedding_model, embedding_model_revision, and embedding_dimension "
+                "must be configured together"
+            )
         if self.chunk_target_tokens > self.chunk_max_tokens:
             raise ValueError("chunk_target_tokens must not exceed chunk_max_tokens")
         if self.chunk_overlap_tokens >= self.chunk_max_tokens:
@@ -49,7 +63,13 @@ class Settings(BaseSettings):
     def validate_qdrant_url(cls, value: str) -> str:
         return str(AnyHttpUrl(value)).rstrip("/")
 
-    @field_validator("qdrant_api_key", "embedding_model", mode="before")
+    @field_validator(
+        "qdrant_api_key",
+        "embedding_model",
+        "embedding_model_revision",
+        "embedding_dimension",
+        mode="before",
+    )
     @classmethod
     def normalize_optional_values(cls, value: object) -> object:
         if value == "":

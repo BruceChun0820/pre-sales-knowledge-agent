@@ -1,0 +1,24 @@
+{
+  "benchmark_id": "phase1-embedding-cpu-v1",
+  "dataset_path": "evaluation/datasets/phase1_embedding_v1.json",
+  "device": "cpu",
+  "batch_size": 8,
+  "normalize_embeddings": true,
+  "candidate_timeout_seconds": 1200,
+  "deterministic_metric_tolerance": 0.01,
+  "candidates": [
+    {
+      "key": "multilingual-minilm",
+      "model_name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "expected_dimension": 384
+    },
+    {
+      "key": "bge-m3-dense",
+      "model_name": "BAAI/bge-m3",
+      "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "expected_dimension": 1024
+    }
+  ],
+  "selection_policy": "Select candidates within metric tolerance of best Hit Rate@5 and Recall@10; then minimize query P95, peak RSS, and estimated float32 index size."
+}

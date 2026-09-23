@@ -6,6 +6,7 @@
 # Python
 __pycache__/
 *.py[cod]
+*.egg-info/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
@@ -20,6 +21,9 @@ data/processed/*
 !data/processed/.gitkeep
 evaluation/reports/*
 !evaluation/reports/.gitkeep
+!evaluation/reports/TASK-05-embedding-benchmark.json
+!evaluation/reports/TASK-05-embedding-benchmark.md
+!evaluation/reports/TASK-05-selected-rerun.json
 models/
 storage/
 qdrant_storage/
