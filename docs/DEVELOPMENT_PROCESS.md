@@ -25,8 +25,8 @@ PM defines Phase and handoffs
         -> QA executes acceptance plan
         -> Dev fixes failed criteria on same scope
         -> QA re-tests
-        -> PM accepts Phase
-        -> dev is merged to main
+        -> PM accepts the verified Task/Phase increment
+        -> PM/maintainer merges the PR to main
 ```
 
 ### 3.1 Phase entry requirements
@@ -58,10 +58,10 @@ PM defines Phase and handoffs
 
 ### 4.1 Permanent branches
 
-- `main`：稳定、已验收的基线。禁止直接开发和未经 QA 的合并。
-- `dev`：当前 Phase 的开发集成分支。所有 feature/task PR 合回它；task branch 的起始 commit 由 Phase 协议和 PM 指定。
+- `main`：唯一长期分支，也是稳定、已验收的集成基线。禁止直接开发、直接 push 和未经 QA/PM 门禁的合并。
+- 不维护永久 `dev` 分支。Dev1/Dev2 是角色名称，不是长期分支；实际开发使用可删除的 task branches。
 
-新 Phase 启动时，PM 先确认 `main` 是上一 Phase 的完整已验收基线。该 Phase 的首批 Dev1/Dev2 task branches 从这个 `main` commit 签出；如 Phase 内存在 contract/integration gate，worker 在开始写入前必须同步 PM 指定的最新 `dev` gate commit。所有 task PR 仍以 `dev` 为目标，Phase 验收后再通过独立 `dev -> main` PR promotion。
+新 Phase 启动时，PM 记录当前 `main` 的精确 SHA。首批 Dev1/Dev2 task branches 从该 commit 签出；如 Phase 内存在 contract/integration gate，worker 在开始写入前必须同步 PM 指定的最新 `main` gate commit。所有 task PR 直接以 `main` 为目标，并按依赖顺序逐个完成 review、QA 和 PM 合并。
 
 ### 4.2 Task branches
 
@@ -77,17 +77,18 @@ docs/phase-01-clarify-metadata-contract
 
 ### 4.3 Merge flow
 
-1. 从 PM 指定的基线创建 task branch：新 Phase 首批分支从已验收 `main` 签出，Phase 内后续分支或写入前同步指定的 `dev` gate commit；
+1. 从 PM 指定的 `main` SHA 创建 task branch；Phase 内后续分支或写入前同步指定的最新 `main` gate commit；
 2. 实现指定 Task，提交测试和文档；
 3. 确认 `origin` 指向用户批准的远程私有仓库；缺失或错误时停止并反馈 PM；
 4. 将 task branch 推送到 `origin`，设置 upstream；
-5. 创建远程 PR，source 为 task branch，target 必须为 `dev`；
+5. 创建远程 PR，source 为 task branch，target 必须为 `main`；
 6. Dev 自检 Quality Gates，并在 PR 描述中提交证据；
 7. PM 检查 scope/architecture 和 PR metadata；
 8. QA 通过远程 PR 对应 commit 按 handoff 验收；
 9. 未通过则在同一 task branch 修复并 push，QA 对新 commit re-test；
-10. Phase 全部 QA PASSED 后，由 PM 批准 `dev -> main` 的独立 PR；
-11. 不允许绕过 QA、直接 push feature commit 到 `main`、或由 Dev 自行 merge。
+10. QA 对 PR 精确 head SHA 给出 PASS 后，由 PM 完成范围/架构审查并批准合并到 `main`；
+11. 多 PR Phase 按文档顺序重复上述门禁；最终 Phase ACCEPTED 需要全部 AC PASS 且所有批准的 PR 已进入 `main`；
+12. 不允许绕过 QA、直接 push feature commit 到 `main`、或由 Dev 自行 merge。
 
 远程仓库必须是已批准的 repository。Dev 不得在 Task 流程中创建新仓库、改变仓库可见性或公开代码。
 
@@ -116,7 +117,7 @@ Commit 应：
 
 - 远程 PR URL；
 - remote repository full name；
-- source branch、target branch（必须为 `dev`）；
+- source branch、target branch（必须为 `main`）；
 - PR head commit SHA；
 - Phase 与 Task IDs；
 - 实际变更文件；
@@ -134,13 +135,13 @@ Commit 应：
 ### 5.3 Remote PR rules
 
 - PR 必须从远程可访问的 task branch 创建，不能只提供本地 commit hash。
-- PR target 必须是 `dev`；误指向 `main` 的 PR 不进入 QA。
+- PR target 必须是 `main`；指向其他长期或临时集成分支的 PR 不进入 QA。
 - PR 必须锁定/显示被 QA 验收的 head commit；Dev push 新 commit 后必须通知 QA 重新确认。
 - PR 描述必须保留 Task、AC、测试命令和已知限制；不能用“已测试”替代结果。
 - GitHub Actions 或其他远程检查失败时，PR 状态为 `NOT READY FOR QA`，除非 PM 明确记录豁免。
 - QA 只验收 PR 当前 head，不验收开发者本地未 push 的改动。
 - PM 只在 QA PASSED 后批准合并；Dev 不得自批准、自合并或删除审计证据。
-- Phase 完成后，`dev -> main` 使用独立 PR，必须引用 Phase QA 结果和 PM 接受决定。
+- 合并后删除已无用途的远程 task branch；禁止将 Dev1/Dev2 task branch 当作永久集成分支。
 
 ## 6. Scope and Change Control
 

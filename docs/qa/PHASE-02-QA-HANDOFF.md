@@ -8,7 +8,7 @@ Independently verify that Phase 2 provides a deterministic direct RAG API with b
 
 Return `NOT READY FOR QA` unless Dev provides:
 
-- reachable remote PR URL(s) targeting `dev` and exact tested head SHA(s);
+- reachable remote PR URL(s) targeting `main` and exact tested head SHA(s);
 - completed Task IDs and task handoff files;
 - accepted Phase 1 index/corpus identity and Phase 2 base SHA;
 - all quality-gate commands reported PASS;
@@ -30,7 +30,7 @@ QA must test the remote PR head, not a local-only commit.
 
 | QA ID | AC | Procedure | PASS condition |
 |---|---|---|---|
-| QA-P2-01 | AC-P2-01 | Inspect contract PR and import domain contracts with FastAPI/Qdrant/LLM SDK unavailable. | PR targets `dev`; imports pass; no framework SDK type leaks. |
+| QA-P2-01 | AC-P2-01 | Inspect contract PR and import domain contracts with FastAPI/Qdrant/LLM SDK unavailable. | PR targets `main`; imports pass; no framework SDK type leaks. |
 | QA-P2-02 | AC-P2-02 | Submit empty query, invalid K, malformed enum, and unauthorized filter/scope overrides. | Every request fails with the documented stable error; no retrieval/generation occurs. |
 | QA-P2-03 | AC-P2-03 | Search positive/negative filter cases and reconcile payloads. | Rank/score/provenance fields exist and filter violations equal 0. |
 | QA-P2-04 | AC-P2-04 | Repeat identical query/search/context runs. | Normalized query, hit order within score tolerance, context order, and source IDs are deterministic. |
@@ -46,7 +46,7 @@ QA must test the remote PR head, not a local-only commit.
 | QA-P2-14 | AC-P2-14 | Re-run both baseline commands from clean recorded inputs. | Reports reproduce within documented tolerance and record all required identities. |
 | QA-P2-15 | AC-P2-15 | Run `./init.sh` and documented focused/acceptance checks. | Every command exits 0; failures/errors equal 0. |
 | QA-P2-16 | AC-P2-16 | Inspect dependency tree, imports, routes, changed files, and runtime services. | No Agent/LangGraph/rewrite/reranker/hybrid/UI/CRM/private data or unrelated service exists. |
-| QA-P2-17 | AC-P2-17 | Compare PR metadata, handoffs, checkout, and tested commits. | PRs are reachable, target `dev`, head SHAs match tested commits, and Dev did not self-merge. |
+| QA-P2-17 | AC-P2-17 | Compare PR metadata, handoffs, checkout, and tested commits. | PRs are reachable, target `main`, head SHAs match tested commits, and Dev did not self-merge. |
 
 ## Required Negative Tests
 
@@ -77,4 +77,4 @@ For every QA ID record PASS/FAIL/BLOCKED, command/procedure, output/count/hash, 
 - `BLOCKED` only for an evidenced external condition;
 - `REQUIREMENT ISSUE` when PM must repair the requirement.
 
-QA approval does not promote `dev` to `main`; PM performs final scope/architecture review and phase acceptance.
+QA approval does not merge the PR. PM performs final scope/architecture review, merges the exact QA-tested head to `main`, and records Phase acceptance when all Phase criteria are complete.

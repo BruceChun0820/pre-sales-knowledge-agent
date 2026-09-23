@@ -7,7 +7,7 @@
 - Remote repository:
 - PR URL:
 - Source branch:
-- Target branch: `dev`
+- Target branch: `main`
 - Head commit SHA:
 - PR status: Draft / Open
 
@@ -40,7 +40,7 @@
 
 - [ ] `origin` 指向已批准的远程私有仓库
 - [ ] source task branch 已 push 并设置 upstream
-- [ ] PR target 是 `dev`，不是 `main`
+- [ ] PR target 是 `main`
 - [ ] PR URL 可由 PM/QA 访问
 - [ ] 当前 head SHA 与本地提交一致
 - [ ] PR 描述包含 Task IDs、AC 对照、测试结果和已知限制
