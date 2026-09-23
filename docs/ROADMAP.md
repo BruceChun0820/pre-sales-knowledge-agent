@@ -61,6 +61,10 @@
 
 ## Phase 2 — Basic RAG Q&A + Citation
 
+### Current Status
+
+Planned under `docs/phases/PHASE-02.md`. Implementation is blocked until Phase 1 is QA PASSED and PM ACCEPTED. Execution uses a contract-first gate, then parallel Dev1 retrieval/evidence and Dev2 generation/API streams, followed by integration and independent QA.
+
 ### Goal
 
 实现最小、直接、可引用的 Question -> Retrieve -> Generate 流程，不引入 Agent loop。
@@ -82,6 +86,8 @@
 - unanswerable cases 能拒答；
 - baseline retrieval/answer report 可重复运行；
 - 所有 API output 通过 schema validation。
+- 所有实现通过远程 PR 提交到 `dev`，并由 QA 对准确的远程 head SHA 验收；
+- citation validator 能阻止未知引用、无引用事实声明和无依据 quote 返回 `answered`。
 
 ## Phase 3 — Retrieval Optimization + Reranking
 
