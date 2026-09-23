@@ -2,7 +2,7 @@
 
 ## Authorization State
 
-`PLANNED — EXECUTE ONLY AFTER PM DECLARES PHASE 2 ACTIVE AND PROVIDES THE ACCEPTED PHASE 1 DEV SHA`.
+`PLANNED — EXECUTE ONLY AFTER PM DECLARES PHASE 2 ACTIVE AND PROVIDES THE ACCEPTED PHASE 1 MAIN SHA`.
 
 ## Assigned Tasks
 
@@ -55,9 +55,9 @@ Exact filenames may be refined inside these areas. Do not edit API, generation, 
 
 ## Delivery Sequence
 
-1. Submit `P2-TASK-01` on `feature/phase-02-contracts`; stop for review/merge.
+1. From the PM-provided accepted `main` SHA, submit `P2-TASK-01` on `feature/phase-02-contracts`; stop for review/merge.
 2. Coordinator supplies the merged `dev` SHA.
-3. Start `feature/phase-02-dev1-retrieval-evidence` in `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev1` from that SHA.
+3. Confirm the pre-created `feature/phase-02-dev1-retrieval-evidence` worktree started from accepted `main`, then sync the coordinator-provided merged contract `dev` SHA before editing.
 4. Implement P2-TASK-02, then P2-TASK-03, then P2-TASK-06 with focused commits.
 5. Push and open a remote PR targeting `dev`; do not merge it.
 

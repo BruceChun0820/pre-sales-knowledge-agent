@@ -2,11 +2,11 @@
   "schema_version": 1,
   "updated_at": "2026-09-23",
   "coordinator_owned": true,
-  "active_phase": "phase-01",
+  "active_phase": "phase-02-planned",
   "phase_gate": {
     "phase-02": {
-      "status": "blocked",
-      "condition": "Phase 1 remote PR is QA PASSED and PM ACCEPTED on dev"
+      "status": "ready-for-explicit-activation",
+      "condition": "Phase 1 is QA PASSED, PM ACCEPTED, and promoted to main; PM/user must explicitly activate Phase 2"
     }
   },
   "features": [
@@ -16,8 +16,8 @@
       "description": "Build the typed, deterministic document-to-vector foundation and select a local embedding model.",
       "owner": "Dev",
       "dependencies": [],
-      "status": "implemented-pending-phase-qa",
-      "evidence": "Commits 6a6a126, e8e8bad, ec20d1d, 93abb34, 539c8d4; selected multilingual MiniLM"
+      "status": "accepted",
+      "evidence": "Commits 6a6a126, e8e8bad, ec20d1d, 93abb34, 539c8d4; selected multilingual MiniLM; QA-001 PASS"
     },
     {
       "id": "P1-TASK-06-08",
@@ -25,8 +25,8 @@
       "description": "Persist and activate vectors safely, complete ingestion orchestration, and produce Phase 1 acceptance evidence.",
       "owner": "Phase 1 Dev",
       "dependencies": ["P1-TASK-01-05"],
-      "status": "in-progress",
-      "evidence": "Phase 1 worktree contains current TASK-06 work; do not modify from Phase 2 planning worktree"
+      "status": "accepted",
+      "evidence": "PR #2 merged to dev; QA-001 AC-P1-01 through AC-P1-17 PASS; final QA report merged by PR #3"
     },
     {
       "id": "P2-TASK-01",
@@ -34,7 +34,7 @@
       "description": "Define framework-neutral shared contracts and deterministic fakes before parallel implementation.",
       "owner": "Dev1",
       "dependencies": ["P1-TASK-06-08"],
-      "status": "planned-blocked",
+      "status": "planned-ready",
       "evidence": "docs/phases/PHASE-02.md"
     },
     {

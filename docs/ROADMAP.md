@@ -35,6 +35,10 @@
 
 ## Phase 1 — Document Ingestion + Vector DB
 
+### Current Status
+
+`ACCEPTED`. AC-P1-01 through AC-P1-17 passed on the QA-tested PR head; PM accepted the implementation and authorized promotion to `main`. Final evidence is recorded in `docs/qa/QA-001.md`.
+
 ### Goal
 
 从公开/模拟文档稳定生成可追溯 chunks，并写入可重建的 Qdrant index。
@@ -63,7 +67,7 @@
 
 ### Current Status
 
-Planned under `docs/phases/PHASE-02.md`. Implementation is blocked until Phase 1 is QA PASSED and PM ACCEPTED. Execution uses a contract-first gate, then parallel Dev1 retrieval/evidence and Dev2 generation/API streams, followed by integration and independent QA.
+Planned under `docs/phases/PHASE-02.md`. Phase 1 prerequisites are satisfied, but Phase 2 implementation still requires explicit PM/user activation. At activation, Dev1 and Dev2 task branches are cut from the accepted `main` baseline, then follow the contract-first integration gate before parallel implementation.
 
 ### Goal
 
