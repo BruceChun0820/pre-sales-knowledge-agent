@@ -122,7 +122,7 @@ def test_dense_retriever_scores_and_sorts_candidates_deterministically() -> None
             orthogonal.text: (0.0, 1.0),
         }
     )
-    store = FakeVectorStore((orthogonal, exact, near))
+    store = FakeVectorStore((exact, near, orthogonal))
     retriever = DenseRetriever(encoder, store)
     request = SearchRequest(query=query, top_k=3)
 

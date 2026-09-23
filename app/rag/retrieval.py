@@ -158,7 +158,7 @@ class DenseRetriever(SearchService):
                 stage="candidate_scoring",
             )
 
-        scored.sort(key=lambda item: (-item[0], item[1].chunk_id))
+        # Preserve the vector store order; cosine values only populate score metadata.
         hits = tuple(
             SearchHit.from_chunk(chunk, rank=rank, score=score)
             for rank, (score, chunk) in enumerate(scored, start=1)
