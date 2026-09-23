@@ -157,7 +157,7 @@ Phase 1 已包含四种格式的合成样例与显式 metadata。启动 Qdrant �
 - [x] RAG、Agent 和 Evaluation 方案已形成
 - [x] 技术选型包含替代方案与取舍
 - [x] 分阶段 Roadmap 已定义
-- [x] Git `main` / `dev` 工作流已定义
+- [x] Git 单一长期分支 `main` + 独立任务分支工作流已定义
 - [x] Phase 1 Objective、Scope、Tasks、Acceptance Criteria 与 Quality Gates 已定义
 - [x] Phase 1 Dev/QA Handoff 已准备
 - [x] Dev 已完成 Phase 1 实现并提交待 QA 的 PR

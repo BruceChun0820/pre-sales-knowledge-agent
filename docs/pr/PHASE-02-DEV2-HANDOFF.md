@@ -45,7 +45,7 @@ Do not modify Dev1-owned retrieval/evidence modules. Dev2 is pre-authorized to a
 
 ## Technical Constraints
 
-- One worktree/branch per stream; all PRs target `dev`.
+- One worktree/branch per stream; all PRs target `main`.
 - Default tests are offline and require no API key.
 - API key is environment-only; no raw prompt/context/provider body in logs/errors.
 - HTTP layer contains no retrieval or generation algorithm.
@@ -55,8 +55,8 @@ Do not modify Dev1-owned retrieval/evidence modules. Dev2 is pre-authorized to a
 ## Delivery Sequence
 
 1. At Phase 2 kickoff, read the complete handoff and inspect the accepted code read-only; record questions to PM without changing repository files.
-2. Confirm `feature/phase-02-dev2-generation-api` in `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` was created from the accepted `main` SHA; after the contract PR merges, sync the coordinator-provided contract `dev` SHA before editing.
-3. Implement P2-TASK-04 and P2-TASK-05; push a remote PR targeting `dev`; stop for review/merge.
+2. Confirm `feature/phase-02-dev2-generation-api` in `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` was created from the accepted `main` SHA; after the contract PR merges, sync the coordinator-provided contract `main` SHA before editing.
+3. Implement P2-TASK-04 and P2-TASK-05; push a remote PR targeting `main`; stop for review/QA/merge.
 4. After Dev1 and Dev2 Wave 1 PRs merge, create `feature/phase-02-direct-rag-integration` in the dedicated integration worktree from the new coordinator-provided SHA.
 5. Implement P2-TASK-07, run full checks, push, and open the integration PR; do not merge it.
 
@@ -69,7 +69,7 @@ Map evidence to AC-P2-07 through AC-P2-17 as applicable. Show offline fake cover
 - Retrieval ranking/context/citation-rule ownership changes without Dev1/PM review.
 - Agent, tool calling, query rewrite, reranker, hybrid search, UI, CRM, ingestion writes, or unrelated infrastructure.
 - Real-provider calls in required CI/default tests.
-- Direct push to `dev`/`main`, self-merge, skipped tests, or weaker ACs.
+- Direct push to `main`, self-merge, skipped tests, or weaker ACs.
 
 ## Stop and Escalate
 

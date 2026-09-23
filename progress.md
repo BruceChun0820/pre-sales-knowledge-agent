@@ -24,14 +24,14 @@ At activation:
 
 1. Create Dev1 and Dev2 task branches/worktrees from the same accepted `main` commit.
 2. Dev1 performs the contract gate; Dev2 remains read-only.
-3. After the contract PR merges to `dev`, both workers sync the exact gate commit before production edits.
-4. Each worker submits a separate remote PR to `dev`; final Phase promotion remains `dev -> main` after QA and PM acceptance.
+3. After the contract PR passes QA/PM review and merges to `main`, both workers sync the exact gate commit before production edits.
+4. Each worker submits a separate remote PR directly to `main`; QA verifies the exact remote head and only PM/maintainer merges after PASS.
 
 ## Decisions
 
 - Use a coordinator pattern; workers do not spawn workers.
 - The start-of-Phase source of truth is the last accepted `main` commit.
-- `dev` is the within-Phase integration target.
+- `main` is the only permanent branch and the target for all reviewed task PRs; Dev1/Dev2 branches are temporary.
 - Dev1 owns retrieval/evidence; Dev2 owns generation/API; QA remains independent.
 - Direct RAG precedes Agent/LangGraph, and dense retrieval precedes rewrite/rerank/hybrid experiments.
 

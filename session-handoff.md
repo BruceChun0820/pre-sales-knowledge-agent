@@ -23,7 +23,7 @@
 
 - No open Phase 1 defect.
 - Do not treat `READY FOR EXPLICIT ACTIVATION` as authorization to start Phase 2.
-- Dev1/Dev2 must begin from the same accepted `main` commit and then sync the contract gate commit before production edits.
+- Dev1/Dev2 must begin from the same accepted `main` commit and then sync the contract gate commit after it is merged to `main`, before production edits.
 
 ## Files Changed
 
@@ -40,4 +40,4 @@
 
 ## Recommended Next Step
 
-On explicit Phase 2 activation, create the Dev1/Dev2 task branches and worktrees from the accepted `main` SHA, then follow `docs/phases/PHASE-02.md`.
+On explicit Phase 2 activation, create the Dev1/Dev2 task branches and worktrees from the accepted `main` SHA. Every delivery targets `main`; do not recreate or use a permanent `dev` integration branch.

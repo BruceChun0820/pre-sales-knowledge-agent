@@ -46,7 +46,7 @@ Exact filenames may be refined inside these areas. Do not edit API, generation, 
 
 ## Technical Constraints
 
-- One worktree/branch per stream; all PRs target `dev`.
+- One worktree/branch per stream; all PRs target `main`.
 - No FastAPI route, OpenAI SDK adapter, Agent framework, UI, or ingestion redesign.
 - No public-contract change after Wave 0 without PM approval.
 - Do not edit `AGENTS.md`, `feature_list.json`, `progress.md`, dependency files/lock, or Dev2-owned paths.
@@ -56,10 +56,10 @@ Exact filenames may be refined inside these areas. Do not edit API, generation, 
 ## Delivery Sequence
 
 1. From the PM-provided accepted `main` SHA, submit `P2-TASK-01` on `feature/phase-02-contracts`; stop for review/merge.
-2. Coordinator supplies the merged `dev` SHA.
-3. Confirm the pre-created `feature/phase-02-dev1-retrieval-evidence` worktree started from accepted `main`, then sync the coordinator-provided merged contract `dev` SHA before editing.
+2. Coordinator supplies the merged contract `main` SHA.
+3. Confirm the pre-created `feature/phase-02-dev1-retrieval-evidence` worktree started from accepted `main`, then sync the coordinator-provided merged contract `main` SHA before editing.
 4. Implement P2-TASK-02, then P2-TASK-03, then P2-TASK-06 with focused commits.
-5. Push and open a remote PR targeting `dev`; do not merge it.
+5. Push and open a remote PR targeting `main`; do not merge it.
 
 Dev1 must not reuse the contract worktree for Wave 1. PM creates or confirms the Dev1 worktree and exact base SHA before implementation begins.
 
@@ -72,7 +72,7 @@ Map evidence to AC-P2-01 through AC-P2-08, AC-P2-14 through AC-P2-17 as applicab
 - Query rewrite, reranking, sparse/hybrid retrieval, LLM-based filter inference.
 - LLM generation/API code, Agent/LangGraph/Tool Calling, UI, CRM, OCR, or parser/chunker redesign.
 - New service/dependency without PM decision.
-- Direct push to `dev`/`main`, self-merge, skipped tests, or weaker ACs.
+- Direct push to `main`, self-merge, skipped tests, or weaker ACs.
 
 ## Stop and Escalate
 

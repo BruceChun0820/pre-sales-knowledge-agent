@@ -117,12 +117,12 @@ PM declares Phase 2 ACTIVE and dispatches Dev1 + Dev2
 Wave 0: Dev1 writes P2-TASK-01 contract PR
         Dev2 performs read-only preparation
               |
-      contract PR merged to dev
+      contract PR QA PASS and merged to main
           /                   \
 Wave 1 Dev1                   Wave 1 Dev2
 P2-TASK-02 -> 03              P2-TASK-04 -> 05
           \                   /
-       reviewed PRs merged to dev
+       reviewed PRs QA PASS and merged to main
           /                   \
 Wave 2 Dev1                   Wave 2 Dev2
 P2-TASK-06                    P2-TASK-07 integration
@@ -130,15 +130,15 @@ P2-TASK-06                    P2-TASK-07 integration
             Independent QA
 ```
 
-At Phase 2 activation, the coordinator records the accepted `main` SHA and creates both worker branches/worktrees from it. Both workers receive their complete prompts and ownership boundaries. Dev2 remains at a no-write gate until the contract PR is merged. The coordinator then records the merged contract `dev` SHA; both workers must sync that exact gate commit before production edits.
+At Phase 2 activation, the coordinator records the accepted `main` SHA and creates both worker branches/worktrees from it. Both workers receive their complete prompts and ownership boundaries. Dev2 remains at a no-write gate until the contract PR passes QA/PM review and is merged. The coordinator then records the merged contract `main` SHA; both workers must sync that exact gate commit before production edits.
 
-Workers do not edit coordinator-owned shared trackers. Cross-stream integration occurs only after reviewed PRs merge to `dev`; neither worker directly pushes to the shared `dev` branch.
+Workers do not edit coordinator-owned shared trackers. Every worker PR targets `main`; workers never push directly to `main`, and only PM/maintainers merge after QA PASS on the exact PR head.
 
 ## Phase 2 Activation Protocol
 
 PM must record all of the following before dispatch:
 
-1. Phase 1 QA result, PM acceptance, and completed `dev -> main` promotion.
+1. Phase 1 QA result, PM acceptance, and accepted `main` baseline.
 2. Accepted Phase 1 `main` SHA.
 3. Dev1 and Dev2 worker prompts and assigned Task IDs.
 4. Exact task branch and worktree for each worker.
@@ -149,11 +149,11 @@ Dispatch sequence:
 1. PM creates the Dev1 and Dev2 task branches/worktrees from the same accepted `main` SHA.
 2. Dev1 receives P2-TASK-01 on `feature/phase-02-contracts`; Dev2 receives its full handoff and may inspect/read/prepare a test plan, but makes no repository changes yet.
 3. After P2-TASK-01 is reviewed and merged, PM records the contract SHA.
-4. PM instructs both implementation streams to sync the exact merged contract `dev` SHA and sends the execution prompts:
+4. PM instructs both implementation streams to sync the exact merged contract `main` SHA and sends the execution prompts:
    - Dev1: `feature/phase-02-dev1-retrieval-evidence`.
    - Dev2: `feature/phase-02-dev2-generation-api`.
-5. Dev1 and Dev2 execute concurrently and submit separate remote PRs to `dev`.
-6. PM integrates reviewed PRs, records the resulting `dev` SHA, and dispatches the final integration branch.
+5. Dev1 and Dev2 execute concurrently and submit separate remote PRs to `main`.
+6. PM merges QA-passed PRs in order, records the resulting `main` SHA, and dispatches the final integration branch.
 
 ## Tasks
 
@@ -414,7 +414,7 @@ Wire the direct RAG service end to end and prove answer, refusal, citation, API,
 
 **Dependencies**
 
-- P2-TASK-03, P2-TASK-05, and P2-TASK-06 merged to `dev`.
+- P2-TASK-03, P2-TASK-05, and P2-TASK-06 merged to `main` after their QA/PM gates.
 
 **Acceptance Criteria**
 
@@ -429,7 +429,7 @@ Wire the direct RAG service end to end and prove answer, refusal, citation, API,
 
 | ID | PASS condition |
 |---|---|
-| AC-P2-01 | The remote contract PR targets `dev`, passes checks, is reviewed, and frozen contracts import without FastAPI/Qdrant/LLM SDKs. |
+| AC-P2-01 | The remote contract PR targets `main`, passes checks, is reviewed, and frozen contracts import without FastAPI/Qdrant/LLM SDKs. |
 | AC-P2-02 | Search requests reject empty queries, invalid K, and malformed/unauthorized filters with stable errors. |
 | AC-P2-03 | Dense search returns ordered rank/score/chunk/source metadata and produces zero metadata-scope violations. |
 | AC-P2-04 | Same inputs/config produce deterministic normalized query, context order, and source IDs. |
@@ -445,7 +445,7 @@ Wire the direct RAG service end to end and prove answer, refusal, citation, API,
 | AC-P2-14 | Retrieval and answer/citation baseline reports reproduce with recorded corpus/index/model/config/code identity. |
 | AC-P2-15 | Full format, lint, unit, integration, contract, and acceptance checks exit 0 on the tested remote PR head. |
 | AC-P2-16 | No Agent/LangGraph/query rewrite/reranker/hybrid/UI/CRM/private data or other out-of-scope component is introduced. |
-| AC-P2-17 | Every implementation is delivered by reachable remote PR(s) targeting `dev`; QA tests exact remote head SHAs and Dev does not self-merge. |
+| AC-P2-17 | Every implementation is delivered by reachable remote PR(s) targeting `main`; QA tests exact remote head SHAs and Dev does not self-merge. |
 
 Missing evidence is a FAIL, not “not tested.”
 
@@ -460,7 +460,7 @@ Before QA:
 - No committed secret, API key, private data, model weights, cache, Qdrant volume, or generated runtime artifact.
 - No unapproved cross-stream file ownership violation or contract divergence.
 - Every task PR includes Task IDs, AC mapping, commands/results, known limitations, branch/base/head SHA, and rollback/reproduction notes.
-- Final integration PR is rebased/merged on the accepted `dev` state and contains no unresolved conflict markers or skipped tests.
+- Final integration PR is based on the latest accepted `main` state and contains no unresolved conflict markers or skipped tests.
 
 ## Branch and Worktree Plan
 
@@ -469,14 +469,14 @@ Required branch/worktree separation after Phase 2 activation:
 | Stream | Branch | Remote Ubuntu worktree | Base |
 |---|---|---|---|
 | Contract gate | `feature/phase-02-contracts` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-contracts` | accepted Phase 1 `main` SHA |
-| Dev1 | `feature/phase-02-dev1-retrieval-evidence` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev1` | created from accepted `main`; sync merged contract `dev` SHA before writes |
-| Dev2 | `feature/phase-02-dev2-generation-api` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` | created from accepted `main`; sync merged contract `dev` SHA before writes |
-| Integration | `feature/phase-02-direct-rag-integration` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-integration` | `dev` after both Wave 1 PRs merge |
+| Dev1 | `feature/phase-02-dev1-retrieval-evidence` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev1` | created from accepted `main`; sync merged contract `main` SHA before writes |
+| Dev2 | `feature/phase-02-dev2-generation-api` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` | created from accepted `main`; sync merged contract `main` SHA before writes |
+| Integration | `feature/phase-02-direct-rag-integration` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-integration` | latest `main` after both Wave 1 PRs merge |
 
-These are task branches, not permanent personal branches. They are archived/deleted after their PR is merged. The coordinator confirms paths are unused before creating worktrees and records the exact accepted `main` and gate `dev` SHAs at dispatch time. Do not reuse or clean an earlier Phase worktree.
+These are task branches, not permanent personal branches. They are archived/deleted after their PR is merged. The coordinator confirms paths are unused before creating worktrees and records the exact accepted and gate `main` SHAs at dispatch time. Do not reuse or clean an earlier Phase worktree.
 
-Merge order is contract PR, then the two independent Wave 1 PRs after review, then the integration PR. If the second Wave 1 PR conflicts with the first merged PR, its owner rebases/merges the latest `dev`, reruns all checks, and updates the remote PR; the coordinator does not resolve the conflict by copying files between worktrees.
+Merge order is contract PR, then the two independent Wave 1 PRs after QA/PM review, then the integration PR. If the second Wave 1 PR conflicts with the first merged PR, its owner syncs the latest `main`, reruns all checks, and updates the remote PR; the coordinator does not resolve the conflict by copying files between worktrees.
 
 ## Phase Exit
 
-Phase 2 exits only after all AC-P2-01 through AC-P2-17 are QA PASS, PM confirms scope/architecture compliance, all approved PRs are merged to `dev`, documentation matches actual behavior, and the accepted `dev` SHA is recorded. Promotion from `dev` to `main` remains a separate PM decision.
+Phase 2 exits only after all AC-P2-01 through AC-P2-17 are QA PASS, PM confirms scope/architecture compliance, all approved PRs are merged to `main`, documentation matches actual behavior, and the accepted `main` SHA is recorded.
