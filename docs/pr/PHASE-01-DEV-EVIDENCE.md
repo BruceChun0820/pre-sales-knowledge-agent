@@ -6,8 +6,8 @@
 - Tasks: TASK-06, TASK-07, TASK-08; TASK-01–05 evidence retained in the existing baseline and benchmark records.
 - Source branch: feature/phase-01-ingestion-qdrant
 - Target branch: dev
-- Status: Implementation and local verification complete; remote PR handoff pending.
-- Commit / PR: populated after the tested commit is pushed.
+- Status: PR #2 is open for QA; no remote status checks were reported at handoff.
+- Commit / PR: 278c9f809430bbbf52d80277ae1491cc443857ac / https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/2
 
 ## Reproduction
 
@@ -28,6 +28,7 @@
 - Selected embedding: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 at e8f8c211226b894fcb81acc59f3b34ba3efd5f42; dimension 384.
 - Candidate comparison and resource measurements: evaluation/reports/TASK-05-embedding-benchmark.md; selected rerun: evaluation/reports/TASK-05-selected-rerun.json.
 - Persistence test restarts only the Compose Qdrant service and creates/deletes only a UUID-named test collection.
+- Remote GitHub status-check list was empty at handoff; local quality gates are recorded above.
 
 ## Acceptance Criteria Mapping
 
@@ -41,9 +42,9 @@
 | P1-10–12 | Qdrant integration persistence/filter tests; typed model and dimension mismatch tests |
 | P1-13 | first sample CLI summary reconciles four manifest records and four active Qdrant points |
 | P1-14 | 52 passing tests; Ruff lint and format checks pass |
-| P1-15 | no secrets, private customer data, model files, or Qdrant runtime storage intended for commit; final tracked-file scan recorded before push |
+| P1-15 | no secrets, private customer data, model files, or Qdrant runtime storage intended for commit; tracked submission-path scan completed before push; no credential values or private/runtime data found |
 | P1-16 | changes remain within Phase 1 scope; no LLM, API, Agent, OCR, hybrid search, or reranker |
-| P1-17 | reachable PR targeting dev with tested head SHA; URL recorded after creation |
+| P1-17 | open PR https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/2 targets dev at tested head 278c9f809430bbbf52d80277ae1491cc443857ac; not merged |
 
 ## Known Limitations and QA Focus
 
