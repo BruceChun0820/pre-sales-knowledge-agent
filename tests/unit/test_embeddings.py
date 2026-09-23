@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import pytest
 
-from app.rag.embeddings import EmbeddingProviderError, SentenceTransformerEmbeddingProvider
+from app.rag.embeddings import (
+    EmbeddingProviderError,
+    SentenceTransformerEmbeddingProvider,
+    SentenceTransformerTokenCounter,
+)
 
 
 class FakeArray:
@@ -50,6 +54,7 @@ def test_sentence_transformer_adapter_returns_versioned_embedding_batch() -> Non
     assert batch.normalized is True
     assert provider.max_sequence_length == 128
     assert provider.count_tokens("one two") == 4
+    assert SentenceTransformerTokenCounter(provider).count("one two") == 4
     assert provider.embed_queries(("query",)) == ((1.0, 5.0),)
 
 

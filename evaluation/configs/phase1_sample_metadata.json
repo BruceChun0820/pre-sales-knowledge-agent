@@ -1,0 +1,34 @@
+{
+  "guide.md": {
+    "title": "Synthetic Product Atlas Guide",
+    "document_type": "product_guide",
+    "confidentiality": "synthetic",
+    "industry": ["finance"],
+    "products": ["Product Atlas"],
+    "language": "en"
+  },
+  "notes.txt": {
+    "title": "Synthetic Product Atlas Note",
+    "document_type": "product_guide",
+    "confidentiality": "synthetic",
+    "industry": ["finance"],
+    "products": ["Product Atlas"],
+    "language": "en"
+  },
+  "guide.pdf": {
+    "title": "Synthetic PDF Product Note",
+    "document_type": "product_guide",
+    "confidentiality": "synthetic",
+    "industry": ["finance"],
+    "products": ["Product Atlas"],
+    "language": "en"
+  },
+  "guide.docx": {
+    "title": "Synthetic DOCX Product Note",
+    "document_type": "product_guide",
+    "confidentiality": "synthetic",
+    "industry": ["finance"],
+    "products": ["Product Atlas"],
+    "language": "en"
+  }
+}

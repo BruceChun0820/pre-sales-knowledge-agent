@@ -19,6 +19,10 @@ class ManifestStatus(StrEnum):
     DISCOVERED = "discovered"
     PARSED = "parsed"
     FAILED = "failed"
+    CHUNKED = "chunked"
+    INDEXED = "indexed"
+    ACTIVE = "active"
+    SKIPPED = "skipped"
     NEEDS_OCR = "needs_ocr"
 
 
@@ -68,14 +72,22 @@ class ManifestStore:
                 entries.append(ManifestEntry.model_validate_json(line))
             except ValueError as exc:
                 raise ValueError(f"invalid manifest entry at line {line_number}: {exc}") from exc
-        return tuple(sorted(entries, key=lambda entry: entry.document_id))
+        return tuple(sorted(entries, key=lambda entry: (entry.document_id, entry.document_version)))
 
-    def get(self, document_id: str) -> ManifestEntry | None:
-        return next((entry for entry in self.load() if entry.document_id == document_id), None)
+    def get(self, document_id: str, document_version: str | None = None) -> ManifestEntry | None:
+        matches = [
+            entry
+            for entry in self.load()
+            if entry.document_id == document_id
+            and (document_version is None or entry.document_version == document_version)
+        ]
+        return max(matches, key=lambda entry: entry.updated_at, default=None)
 
     def upsert(self, entry: ManifestEntry) -> None:
-        entries = {current.document_id: current for current in self.load()}
-        entries[entry.document_id] = entry
+        entries = {
+            (current.document_id, current.document_version): current for current in self.load()
+        }
+        entries[(entry.document_id, entry.document_version)] = entry
         ordered_lines = [
             current.model_dump_json()
             for _, current in sorted(entries.items(), key=lambda item: item[0])
@@ -99,8 +111,10 @@ def update_manifest_entry(
     return entry.model_copy(
         update={
             "status": status,
-            "parser_name": parser_name,
-            "parser_version": parser_version,
+            "parser_name": parser_name if parser_name is not None else entry.parser_name,
+            "parser_version": parser_version
+            if parser_version is not None
+            else entry.parser_version,
             "updated_at": datetime.now(UTC),
             "error": error,
         }

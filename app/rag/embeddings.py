@@ -147,3 +147,13 @@ class SentenceTransformerEmbeddingProvider:
         if any(len(vector) != self.dimension for vector in vectors):
             raise EmbeddingProviderError("model returned a vector with an unexpected dimension")
         return vectors
+
+
+class SentenceTransformerTokenCounter:
+    """Expose the selected embedding tokenizer through the chunker contract."""
+
+    def __init__(self, provider: SentenceTransformerEmbeddingProvider) -> None:
+        self.provider = provider
+
+    def count(self, text: str) -> int:
+        return self.provider.count_tokens(text)
