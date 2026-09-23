@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-23",
+  "coordinator_owned": true,
+  "active_phase": "phase-01",
+  "phase_gate": {
+    "phase-02": {
+      "status": "blocked",
+      "condition": "Phase 1 remote PR is QA PASSED and PM ACCEPTED on dev"
+    }
+  },
+  "features": [
+    {
+      "id": "P1-TASK-01-05",
+      "name": "Phase 1 ingestion foundation through embedding selection",
+      "description": "Build the typed, deterministic document-to-vector foundation and select a local embedding model.",
+      "owner": "Dev",
+      "dependencies": [],
+      "status": "implemented-pending-phase-qa",
+      "evidence": "Commits 6a6a126, e8e8bad, ec20d1d, 93abb34, 539c8d4; selected multilingual MiniLM"
+    },
+    {
+      "id": "P1-TASK-06-08",
+      "name": "Qdrant persistence, ingestion orchestration, and Phase 1 evidence",
+      "description": "Persist and activate vectors safely, complete ingestion orchestration, and produce Phase 1 acceptance evidence.",
+      "owner": "Phase 1 Dev",
+      "dependencies": ["P1-TASK-01-05"],
+      "status": "in-progress",
+      "evidence": "Phase 1 worktree contains current TASK-06 work; do not modify from Phase 2 planning worktree"
+    },
+    {
+      "id": "P2-TASK-01",
+      "name": "Freeze Phase 2 contracts and test doubles",
+      "description": "Define framework-neutral shared contracts and deterministic fakes before parallel implementation.",
+      "owner": "Dev1",
+      "dependencies": ["P1-TASK-06-08"],
+      "status": "planned-blocked",
+      "evidence": "docs/phases/PHASE-02.md"
+    },
+    {
+      "id": "P2-TASK-02",
+      "name": "Deterministic query processing and dense retrieval",
+      "description": "Normalize queries and retrieve ranked, filtered, source-aware evidence from the accepted Phase 1 index.",
+      "owner": "Dev1",
+      "dependencies": ["P2-TASK-01"],
+      "status": "planned",
+      "evidence": "docs/pr/PHASE-02-DEV1-HANDOFF.md"
+    },
+    {
+      "id": "P2-TASK-03",
+      "name": "Context construction, evidence gate, and citation validation",
+      "description": "Build bounded deterministic context and enforce evidence sufficiency and citation integrity.",
+      "owner": "Dev1",
+      "dependencies": ["P2-TASK-02"],
+      "status": "planned",
+      "evidence": "docs/pr/PHASE-02-DEV1-HANDOFF.md"
+    },
+    {
+      "id": "P2-TASK-04",
+      "name": "Structured answer generation adapters",
+      "description": "Provide deterministic fake and OpenAI-compatible adapters with structured output and typed failures.",
+      "owner": "Dev2",
+      "dependencies": ["P2-TASK-01"],
+      "status": "planned",
+      "evidence": "docs/pr/PHASE-02-DEV2-HANDOFF.md"
+    },
+    {
+      "id": "P2-TASK-05",
+      "name": "FastAPI endpoints and operational error handling",
+      "description": "Expose health, search, and query endpoints with stable schemas, errors, and telemetry.",
+      "owner": "Dev2",
+      "dependencies": ["P2-TASK-01", "P2-TASK-04"],
+      "status": "planned",
+      "evidence": "docs/pr/PHASE-02-DEV2-HANDOFF.md"
+    },
+    {
+      "id": "P2-TASK-06",
+      "name": "Retrieval baseline and regression evidence",
+      "description": "Produce a reproducible dense retrieval baseline and deterministic regression evidence.",
+      "owner": "Dev1",
+      "dependencies": ["P2-TASK-02", "P2-TASK-03"],
+      "status": "planned",
+      "evidence": "docs/pr/PHASE-02-DEV1-HANDOFF.md"
+    },
+    {
+      "id": "P2-TASK-07",
+      "name": "Direct RAG integration and end-to-end acceptance",
+      "description": "Wire retrieval, evidence gating, generation, citation validation, and API acceptance end to end.",
+      "owner": "Dev2",
+      "dependencies": ["P2-TASK-03", "P2-TASK-05", "P2-TASK-06"],
+      "status": "planned",
+      "evidence": "docs/pr/PHASE-02-DEV2-HANDOFF.md"
+    }
+  ]
+}
