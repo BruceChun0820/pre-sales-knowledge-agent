@@ -2,7 +2,7 @@
 
 ## Authorization State
 
-`PLANNED — DO NOT IMPLEMENT UNTIL PM PROVIDES THE ACCEPTED PHASE 1 DEV SHA`.
+`PLANNED — EXECUTE ONLY AFTER PM DECLARES PHASE 2 ACTIVE AND PROVIDES THE ACCEPTED PHASE 1 DEV SHA`.
 
 ## Assigned Tasks
 
@@ -57,9 +57,11 @@ Exact filenames may be refined inside these areas. Do not edit API, generation, 
 
 1. Submit `P2-TASK-01` on `feature/phase-02-contracts`; stop for review/merge.
 2. Coordinator supplies the merged `dev` SHA.
-3. Start `feature/phase-02-retrieval-evidence` from that SHA.
+3. Start `feature/phase-02-dev1-retrieval-evidence` in `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev1` from that SHA.
 4. Implement P2-TASK-02, then P2-TASK-03, then P2-TASK-06 with focused commits.
 5. Push and open a remote PR targeting `dev`; do not merge it.
+
+Dev1 must not reuse the contract worktree for Wave 1. PM creates or confirms the Dev1 worktree and exact base SHA before implementation begins.
 
 ## Acceptance and Quality Gates
 

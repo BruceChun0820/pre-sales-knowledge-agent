@@ -2,7 +2,7 @@
 
 ## Authorization State
 
-`PLANNED — DO NOT IMPLEMENT UNTIL P2-TASK-01 IS MERGED AND PM PROVIDES THE BASE SHA`.
+`PLANNED — PM MAY DISPATCH AT PHASE 2 START, BUT REPOSITORY WRITES REMAIN BLOCKED UNTIL P2-TASK-01 IS MERGED AND PM PROVIDES THE CONTRACT SHA`.
 
 ## Assigned Tasks
 
@@ -54,10 +54,11 @@ Do not modify Dev1-owned retrieval/evidence modules. Dev2 is pre-authorized to a
 
 ## Delivery Sequence
 
-1. After contract PR merge, start `feature/phase-02-generation-api` from coordinator-provided `dev` SHA.
-2. Implement P2-TASK-04 and P2-TASK-05; push a remote PR targeting `dev`; stop for review/merge.
-3. After Dev1 and Dev2 Wave 1 PRs merge, create `feature/phase-02-direct-rag-integration` from the new coordinator-provided SHA.
-4. Implement P2-TASK-07, run full checks, push, and open the integration PR; do not merge it.
+1. At Phase 2 kickoff, read the complete handoff and inspect the accepted code read-only; record questions to PM without changing repository files.
+2. After the contract PR merges, start `feature/phase-02-dev2-generation-api` in `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` from the coordinator-provided contract `dev` SHA.
+3. Implement P2-TASK-04 and P2-TASK-05; push a remote PR targeting `dev`; stop for review/merge.
+4. After Dev1 and Dev2 Wave 1 PRs merge, create `feature/phase-02-direct-rag-integration` in the dedicated integration worktree from the new coordinator-provided SHA.
+5. Implement P2-TASK-07, run full checks, push, and open the integration PR; do not merge it.
 
 ## Acceptance and Quality Gates
 

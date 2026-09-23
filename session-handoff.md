@@ -24,7 +24,8 @@
 2. Check the Phase 1 remote PR and QA evidence.
 3. If the gate is not met, continue Phase 1 only; do not dispatch Phase 2 workers.
 4. When accepted, record the accepted `dev` SHA and create isolated Dev1/Dev2 worktrees from it.
-5. Dispatch only `P2-TASK-01`; after its PR is reviewed and merged, update both worker bases and launch Wave 1.
+5. Declare Phase 2 active and dispatch both handoffs: Dev1 starts `P2-TASK-01`; Dev2 remains read-only.
+6. After the contract PR is reviewed and merged, record its `dev` SHA and create the dedicated Dev1/Dev2 implementation worktrees from that exact SHA.
 
 ## Verification Evidence
 

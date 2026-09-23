@@ -36,6 +36,8 @@ Phase 2 implementation is **BLOCKED** until all of the following are true:
 - Use a coordinator pattern rather than allowing workers to delegate recursively.
 - Freeze Phase 2 public contracts in a small gating PR before parallel implementation.
 - Dev1 owns retrieval/evidence; Dev2 owns generation/API; QA is independent.
+- At Phase 2 activation, PM dispatches both workers; Dev2 remains read-only until the Dev1 contract gate merges, after which both task branches start from the same `dev` SHA.
+- Dev1 and Dev2 use dedicated task-named branches/worktrees and submit separate remote PRs to `dev`.
 - Basic RAG remains a direct service path; Agent/LangGraph begins no earlier than Phase 4.
 - Dense retrieval is the Phase 2 baseline. Query rewrite, reranking, and hybrid search remain Phase 3 experiments.
 
@@ -58,8 +60,8 @@ Phase 2 implementation is **BLOCKED** until all of the following are true:
 
 ## Next Session
 
-Check Phase 1 TASK-06–08 and remote PR/QA status before dispatching any Phase 2 worker.
+Check Phase 1 TASK-06–08 and remote PR/QA status before declaring Phase 2 active. At activation, record the accepted SHA and dispatch both worker handoffs using the Phase 2 protocol.
 
 ## Recommended Next Step
 
-Finish Phase 1 TASK-06–08, open the remote PR, run QA, and obtain PM acceptance. Then execute Phase 2 Wave 0 (`P2-TASK-01`) before starting Dev1/Dev2 parallel streams.
+Finish Phase 1 TASK-06–08, open the remote PR, run QA, and obtain PM acceptance. Then declare Phase 2 active, dispatch Dev1 to the contract gate and Dev2 to read-only preparation, and start both implementation branches from the merged contract SHA.

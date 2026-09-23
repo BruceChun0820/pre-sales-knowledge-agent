@@ -27,6 +27,14 @@ Before writing code:
 - Dev workers write task-specific evidence to `docs/handoffs/<TASK-ID>.md` and the remote PR; they do not edit shared status trackers.
 - If another stream owns a file or a public contract must change, stop and send a proposed diff/decision request to the coordinator.
 
+## Phase 2 Worker Dispatch
+
+- PM starts Phase 2 by recording the accepted Phase 1 `dev` SHA and explicitly dispatching the Dev1 and Dev2 handoffs.
+- Dev1 and Dev2 use separate named worktrees and task branches; neither worker works in the Phase 1 checkout or the other worker's worktree.
+- Dev1 completes the contract gate first. Dev2 may perform read-only preparation after dispatch but must not edit code until PM supplies the merged contract SHA.
+- After the contract gate, both implementation branches start from the same `dev` SHA and may execute concurrently within their owned paths.
+- Each worker pushes only its task branch and opens a remote PR to `dev`; approved PRs are integrated by the coordinator in the documented order.
+
 ## Verification Commands
 
 - Use `./init.sh` for the standard full check. Add focused tests required by the active Task.
