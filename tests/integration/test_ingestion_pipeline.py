@@ -99,6 +99,46 @@ def test_ingestion_pipeline_skips_unchanged_and_activates_changed_version(
     assert store.count(tenant_id="demo", active_only=True) == 1
 
 
+def test_metadata_only_change_replaces_payload_without_duplicate_points(tmp_path: Path) -> None:
+    root = tmp_path / "documents"
+    root.mkdir()
+    (root / "same.txt").write_text("Stable document bytes.", encoding="utf-8")
+    provider = FakeEmbeddingProvider()
+    pipeline, store, manifest = _pipeline(root, tmp_path, provider)
+    finance = _metadata()
+    healthcare = finance.model_copy(update={"industry": ("healthcare",)})
+
+    first = pipeline.run({"same.txt": finance})
+    changed = pipeline.run({"same.txt": healthcare})
+    unchanged = pipeline.run({"same.txt": healthcare})
+
+    assert (first.upserted, first.failed) == (1, 0)
+    assert (changed.skipped, changed.upserted, changed.failed) == (0, 1, 0)
+    assert (unchanged.skipped, unchanged.upserted, unchanged.failed) == (1, 0, 0)
+    assert len(manifest.load()) == 1
+    assert store.count(tenant_id="demo", active_only=True) == 1
+    assert store.count(tenant_id="demo", filters={"industry": "finance"}, active_only=True) == 0
+    assert store.count(tenant_id="demo", filters={"industry": "healthcare"}, active_only=True) == 1
+
+
+def test_failed_metadata_only_change_keeps_previous_payload_active(tmp_path: Path) -> None:
+    root = tmp_path / "documents"
+    root.mkdir()
+    (root / "same.txt").write_text("Stable document bytes.", encoding="utf-8")
+    provider = FakeEmbeddingProvider()
+    pipeline, store, _ = _pipeline(root, tmp_path, provider)
+    assert pipeline.run({"same.txt": _metadata()}).failed == 0
+    provider.fail = True
+
+    failed = pipeline.run(
+        {"same.txt": _metadata().model_copy(update={"industry": ("healthcare",)})}
+    )
+
+    assert failed.failed == 1
+    assert store.count(tenant_id="demo", filters={"industry": "finance"}, active_only=True) == 1
+    assert store.count(tenant_id="demo", filters={"industry": "healthcare"}, active_only=True) == 0
+
+
 def test_failed_replacement_leaves_previous_version_active(tmp_path: Path) -> None:
     root = tmp_path / "documents"
     root.mkdir()

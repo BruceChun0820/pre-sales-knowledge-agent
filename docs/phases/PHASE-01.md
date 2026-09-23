@@ -2,7 +2,7 @@
 
 ## Status
 
-`PLANNED`. Dev/QA handoffs are prepared; business implementation requires explicit user authorization and has not started.
+`READY FOR QA RETEST`. Phase 1 implementation is complete; QA-001 issues have been addressed by Dev and require independent QA verification. The Phase is not QA PASSED.
 
 ## Objective
 

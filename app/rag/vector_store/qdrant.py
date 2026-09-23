@@ -6,7 +6,7 @@ from typing import Any
 
 from qdrant_client import QdrantClient, models
 
-from app.domain.models import Chunk, EmbeddingBatch, TenantId
+from app.domain.models import Chunk, DocumentRecord, EmbeddingBatch, TenantId
 
 _NAMESPACE = uuid.UUID("a12a8c4d-28dc-4a45-bc15-159ce4d26a9d")
 _INDEXED = {
@@ -20,6 +20,19 @@ _INDEXED = {
 }
 _FILTERS = frozenset(_INDEXED) - {"tenant_id"}
 _CHUNK_FIELDS = frozenset(Chunk.model_fields)
+_DOCUMENT_METADATA_FIELDS = frozenset(
+    {
+        "title",
+        "source_uri",
+        "document_type",
+        "industry",
+        "products",
+        "language",
+        "published_at",
+        "confidentiality",
+        "content_checksum",
+    }
+)
 
 
 class VectorStoreError(RuntimeError):
@@ -201,6 +214,43 @@ class QdrantVectorStore:
             ).count
         except Exception as exc:
             raise VectorStoreError(f"Qdrant count failed: {exc}") from exc
+
+    def active_version_metadata_matches(self, document: DocumentRecord) -> bool:
+        """Return whether every active point stores the supplied explicit metadata."""
+        if document.tenant_id != self.tenant_id:
+            return False
+        expected = document.model_dump(mode="json", include=_DOCUMENT_METADATA_FIELDS)
+        query_filter = self._filter(
+            self.tenant_id,
+            {
+                "document_id": document.document_id,
+                "document_version": document.document_version,
+            },
+            active_default=True,
+        )
+        offset = None
+        found = False
+        try:
+            while True:
+                points, offset = self._client.scroll(
+                    collection_name=self.collection_name,
+                    scroll_filter=query_filter,
+                    limit=256,
+                    offset=offset,
+                    with_payload=True,
+                    with_vectors=False,
+                )
+                for point in points:
+                    found = True
+                    payload = point.payload or {}
+                    actual = {field: payload.get(field) for field in _DOCUMENT_METADATA_FIELDS}
+                    if actual != expected:
+                        return False
+                if offset is None:
+                    break
+        except Exception as exc:
+            raise VectorStoreError(f"Qdrant metadata verification failed: {exc}") from exc
+        return found
 
     def activate_version(self, *, document_id: str, document_version: str) -> None:
         """Activate a verified version, then retire its older versions."""

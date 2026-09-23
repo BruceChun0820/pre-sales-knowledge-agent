@@ -116,10 +116,14 @@ class IngestionPipeline:
                 errors.append(error)
                 continue
 
+            document = self._document(item, metadata)
             try:
-                if self._is_unchanged(item):
+                active_version_exists = self._active_version_exists(item)
+                if self._is_unchanged(item, document, active_version_exists):
                     counts["skipped"] += 1
                     continue
+                if active_version_exists:
+                    document = document.model_copy(update={"active": True})
             except VectorStoreError as exc:
                 error = self._error(
                     IngestionErrorCode.VECTOR_STORE_FAILED,
@@ -163,10 +167,7 @@ class IngestionPipeline:
             errors=tuple(errors),
         )
 
-    def _is_unchanged(self, item: DiscoveredFile) -> bool:
-        current = self.manifest.get(item.document_id, item.document_version)
-        if current is None or current.status is not ManifestStatus.ACTIVE:
-            return False
+    def _active_version_exists(self, item: DiscoveredFile) -> bool:
         return (
             self.vector_store.count(
                 tenant_id=self.vector_store.tenant_id,
@@ -178,6 +179,14 @@ class IngestionPipeline:
             )
             > 0
         )
+
+    def _is_unchanged(
+        self, item: DiscoveredFile, document: DocumentRecord, active_version_exists: bool
+    ) -> bool:
+        current = self.manifest.get(item.document_id, item.document_version)
+        if current is None or current.status is not ManifestStatus.ACTIVE:
+            return False
+        return active_version_exists and self.vector_store.active_version_metadata_matches(document)
 
     @staticmethod
     def _document(item: DiscoveredFile, metadata: DocumentMetadata) -> DocumentRecord:
