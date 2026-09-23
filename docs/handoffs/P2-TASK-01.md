@@ -1,13 +1,14 @@
-# P2-TASK-01 Handoff ∫w^~)ﬁt Contract Gate
+# P2-TASK-01 Handoff ‚Äî Contract Gate
 
 ## Delivery
 
-- Task: `P2-TASK-01` ∫w^~)ﬁt Freeze Domain/API Contracts and Test Doubles
+- Task: `P2-TASK-01` ‚Äî Freeze Domain/API Contracts and Test Doubles
 - Branch: `feature/phase-02-contracts`
 - Base branch: `main`
 - Base/start commit: `6a5da8782701bdd59a0b2ae07dede273b416a488` (Phase 2 activation commit; parent `cb31243f410b4eab0f8c240b21622e9324d622b3`)
-- Implementation revision: recorded in the Git commit history on this branch.
-- Pull request: submitted directly to `main`; see linked PR metadata for final head SHA.
+- Implementation commit and initial submitted PR head: `1ee187c2553d0993d24fbb5be164c2de77cd047e`.
+- Pull request: [#9](https://github.com/BruceChun0820/pre-sales-knowledge-agent/pull/9), open and targeting `main`.
+- Final review head after this handoff update is recorded in the PR description and GitHub PR metadata.
 - Worktree: `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-contracts`
 
 ## Scope Delivered
@@ -26,10 +27,10 @@ Added framework-neutral contracts for typed search requests, explicit filters, r
 
 ## Files Changed
 
-- `app/domain/contracts.py`+ßuÁ‚ùÁT Phase 2 public domain contracts and protocols.
-- `app/domain/fakes.py` ∫w^~)ﬁt deterministic test doubles only.
-- `tests/unit/test_phase2_contracts.py` ∫w^~)ﬁt validation, serialization, SDK isolation, and fake-path tests.
-- `docs/handoffs/P2-TASK-01.md`"È›y¯ßy‘ this evidence record.
+- `app/domain/contracts.py` ‚Äî Phase 2 public domain contracts and protocols.
+- `app/domain/fakes.py` ‚Äî deterministic test doubles only.
+- `tests/unit/test_phase2_contracts.py` ‚Äî validation, serialization, SDK isolation, and fake-path tests.
+- `docs/handoffs/P2-TASK-01.md` ‚Äî this evidence record.
 
 No shared tracker, Phase plan, dependency/lock file, retrieval implementation, generation adapter, API route, or Phase 1 model/interface was changed.
 
@@ -38,7 +39,7 @@ No shared tracker, Phase plan, dependency/lock file, retrieval implementation, g
 - Initial `./init.sh`: stopped with exit 2 because the new remote worktree had no complete `.venv`.
 - Followed `docs/DEPENDENCY_BASELINE.md`: created isolated `.venv` and installed existing `requirements-phase1.lock`; no dependency files were changed.
 - `.venv/bin/python -m pytest tests/unit/test_phase2_contracts.py -q`: **19 passed**.
-- `./init.sh`: **PASS** ∫w^~)ﬁt 73 tests passed; Ruff lint passed; 72 files already formatted; whitespace/conflict check passed. One pre-existing in-memory Qdrant payload-index warning was emitted by the Phase 1 ingestion integration test.
+- `./init.sh`: **PASS** ‚Äî 73 tests passed; Ruff lint passed; 72 files already formatted; whitespace/conflict check passed. One pre-existing in-memory Qdrant payload-index warning was emitted by the Phase 1 ingestion integration test.
 - GitHub CLI was not present on Ubuntu; PR submission uses the connected GitHub integration.
 
 ## Limitations and Reproduction
@@ -52,4 +53,4 @@ Reproduce from the remote worktree with:
 ./init.sh
 ```
 
-The PR head is the review target; QA should check out that exact remote head and rerun `./init.sh`. No merge was performed. Dev2 remains read-only until PM/QA approve and merge the contract PR; after merge, wait for PM's exact resulting `main` SHA before retrieval work.
+The initial submitted PR head was `1ee187c2553d0993d24fbb5be164c2de77cd047e`; the PR head after this handoff update is stated in the PR description and GitHub metadata. QA should check out that exact remote head and rerun `./init.sh`. No merge was performed. Dev2 remains read-only until PM/QA approve and merge the contract PR; after merge, wait for PM's exact resulting `main` SHA before retrieval work.
