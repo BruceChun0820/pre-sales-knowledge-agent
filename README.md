@@ -2,7 +2,7 @@
 
 售前知识与方案智能助手：一个面向企业售前团队的、可评估的 RAG + Agent 项目。项目将公开资料与自建模拟售前文档转化为可检索知识库，支持带来源的问答、历史方案检索、跨方案比较、文档总结和 Proposal 大纲辅助生成。
 
-> 当前状态：**Phase 1 — Document Ingestion + Vector DB / Dev implementation complete, awaiting QA retest**。已实现文档解析、清理分块、本地 embedding、Qdrant 持久化和幂等入库 CLI。Dev 验收证据和 PR 目标为 `dev`；最终接受状态由 PM/QA 决定。
+> 当前状态：**Phase 1 — Document Ingestion + Vector DB / ACCEPTED**。AC-P1-01～17 已通过独立 QA，最终报告见 `docs/qa/QA-001.md`。Phase 2 规划与 Dev1/Dev2 handoff 已完成，但尚未开始业务实现。
 
 ## 1. 项目背景
 
@@ -130,8 +130,8 @@ Phase 1 已包含四种格式的合成样例与显式 metadata。启动 Qdrant �
 | Phase | 主题 | 当前状态 |
 |---|---|---|
 | 0 | Documentation & Architecture | 已完成并建立 Git 基线 |
-| 1 | Document Ingestion + Vector DB | Dev implementation complete；等待 QA 复测 |
-| 2 | Basic RAG Q&A + Citation | 未开始 |
+| 1 | Document Ingestion + Vector DB | ACCEPTED；QA-001 全部通过 |
+| 2 | Basic RAG Q&A + Citation | PLANNED；等待 PM 明确启动 |
 | 3 | Retrieval Optimization + Reranking | 未开始 |
 | 4 | Agent Tool Calling + ReAct | 未开始 |
 | 5 | Formal Evaluation | 未开始；评测基础从 Phase 1 建立 |
@@ -161,4 +161,7 @@ Phase 1 已包含四种格式的合成样例与显式 metadata。启动 Qdrant �
 - [x] Phase 1 Objective、Scope、Tasks、Acceptance Criteria 与 Quality Gates 已定义
 - [x] Phase 1 Dev/QA Handoff 已准备
 - [x] Dev 已完成 Phase 1 实现并提交待 QA 的 PR
-- [ ] QA 尚未开始 Phase 1 验收
+- [x] QA 已完成 Phase 1 验收，AC-P1-01～17 全部 PASS
+- [x] PM 已接受 Phase 1 并批准 promotion 至 `main`
+- [x] Phase 2 Harness、任务拆分、Dev1/Dev2 与 QA handoff 已完成
+- [ ] Phase 2 尚未获得明确启动指令

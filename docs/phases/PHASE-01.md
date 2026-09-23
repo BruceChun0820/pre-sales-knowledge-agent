@@ -2,7 +2,7 @@
 
 ## Status
 
-`READY FOR QA RETEST`. Phase 1 implementation is complete; QA-001 issues have been addressed by Dev and require independent QA verification. The Phase is not QA PASSED.
+`ACCEPTED`. PR #2 was independently re-tested at `21f5f91fe563e87485e6eae6a50b4a6064d0267a`; AC-P1-01 through AC-P1-17 passed. PM accepted the scope and architecture, merged the implementation to `dev`, and authorized promotion to `main`. Final evidence is in `docs/qa/QA-001.md`.
 
 ## Objective
 

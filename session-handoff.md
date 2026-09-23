@@ -1,32 +1,43 @@
 # Coordinator Session Handoff
 
-## Objective and Status
+## Current Objective
 
-- Objective: prepare a harness-driven, parallel Phase 2 plan without entering implementation.
-- Status: planning complete; Phase 2 implementation blocked by the Phase 1 acceptance gate.
-- Branch/base: `docs/phase-02-plan` from `origin/dev` at `539c8d4`.
+- Preserve Phase 1 as the accepted stable `main` baseline.
+- Keep Phase 2 planned but inactive until explicit PM/user authorization.
 
-## Completed
+## Current Status
 
-- Added repository operating instructions and coordinator-owned state tracking.
-- Defined Phase 2 objective, tasks, acceptance criteria, quality gates, work waves, and file ownership.
-- Prepared separate Dev1, Dev2, and QA handoffs plus copyable worker prompts.
+- Phase 1: QA PASSED and PM ACCEPTED.
+- Final QA evidence: `docs/qa/QA-001.md`.
+- Phase 2: planning complete; no business implementation started.
+- Worker branches/worktrees: not yet created for Phase 2.
 
-## Important Repository State
+## Completed This Session
 
-- The original Phase 1 worktree contains active TASK-06 files. Do not clean, reset, or overwrite it.
-- Phase 2 planning was prepared in an isolated worktree.
-- The authoritative status is `feature_list.json`; narrative context is in `progress.md`.
+- Merged Phase 1 implementation PR #2 to `dev`.
+- Submitted and merged final QA evidence PR #3 to `dev`.
+- Merged Harness/Phase 2 planning PR #1 to `dev`.
+- Updated project status and branch-source policy for Phase promotion.
 
-## Resume Procedure
+## Blockers / Risks
+
+- No open Phase 1 defect.
+- Do not treat `READY FOR EXPLICIT ACTIVATION` as authorization to start Phase 2.
+- Dev1/Dev2 must begin from the same accepted `main` commit and then sync the contract gate commit before production edits.
+
+## Files Changed
+
+- Project status and roadmap documents.
+- Harness state and lifecycle files.
+- Phase 2 branch/worktree and worker prompt instructions.
+
+## Next Session Startup
 
 1. Read `AGENTS.md`, `feature_list.json`, and `progress.md`.
-2. Check the Phase 1 remote PR and QA evidence.
-3. If the gate is not met, continue Phase 1 only; do not dispatch Phase 2 workers.
-4. When accepted, record the accepted `dev` SHA and create isolated Dev1/Dev2 worktrees from it.
-5. Declare Phase 2 active and dispatch both handoffs: Dev1 starts `P2-TASK-01`; Dev2 remains read-only.
-6. After the contract PR is reviewed and merged, record its `dev` SHA and create the dedicated Dev1/Dev2 implementation worktrees from that exact SHA.
+2. Confirm the current `main` SHA and a clean checkout.
+3. Run `./init.sh` before any implementation.
+4. If Phase 2 has not been explicitly activated, stop after status inspection.
 
-## Verification Evidence
+## Recommended Next Step
 
-Run the harness validator, JSON parser, and shell syntax check after changes. Full project tests are not required for documentation-only planning changes.
+On explicit Phase 2 activation, create the Dev1/Dev2 task branches and worktrees from the accepted `main` SHA, then follow `docs/phases/PHASE-02.md`.

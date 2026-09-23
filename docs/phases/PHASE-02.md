@@ -2,9 +2,9 @@
 
 ## Status and Entry Gate
 
-`PLANNED — BLOCKED BY PHASE 1 ACCEPTANCE`.
+`PLANNED — READY FOR EXPLICIT ACTIVATION`.
 
-Planning is approved to proceed, but no Phase 2 production implementation may begin until the Phase 1 remote PR is QA PASSED, PM ACCEPTED, and merged to `dev`. The accepted `dev` SHA becomes the immutable base for all Phase 2 worktrees.
+Phase 1 is QA PASSED and PM ACCEPTED. Its complete state is promoted to `main`. No Phase 2 production implementation begins until PM/user explicitly declares Phase 2 active. At activation, the promoted Phase 1 `main` SHA is the common checkout baseline for Dev1 and Dev2.
 
 ## Objective
 
@@ -110,7 +110,7 @@ The API layer may depend on application/domain contracts. Domain contracts must 
 ## Parallel Execution Plan
 
 ```text
-Phase 1 QA PASSED + PM ACCEPTED
+Phase 1 QA PASSED + PM ACCEPTED + promoted to main
               |
 PM declares Phase 2 ACTIVE and dispatches Dev1 + Dev2
               |
@@ -130,7 +130,7 @@ P2-TASK-06                    P2-TASK-07 integration
             Independent QA
 ```
 
-At Phase 2 activation, both workers receive their complete prompts and ownership boundaries. Dev2 is considered dispatched but remains at a no-write gate until the contract PR is merged. The coordinator then records the merged contract SHA and creates or resets both implementation worktrees from that exact `dev` commit.
+At Phase 2 activation, the coordinator records the accepted `main` SHA and creates both worker branches/worktrees from it. Both workers receive their complete prompts and ownership boundaries. Dev2 remains at a no-write gate until the contract PR is merged. The coordinator then records the merged contract `dev` SHA; both workers must sync that exact gate commit before production edits.
 
 Workers do not edit coordinator-owned shared trackers. Cross-stream integration occurs only after reviewed PRs merge to `dev`; neither worker directly pushes to the shared `dev` branch.
 
@@ -138,18 +138,18 @@ Workers do not edit coordinator-owned shared trackers. Cross-stream integration 
 
 PM must record all of the following before dispatch:
 
-1. Phase 1 QA result and PM acceptance.
-2. Accepted Phase 1 `dev` SHA.
+1. Phase 1 QA result, PM acceptance, and completed `dev -> main` promotion.
+2. Accepted Phase 1 `main` SHA.
 3. Dev1 and Dev2 worker prompts and assigned Task IDs.
 4. Exact task branch and worktree for each worker.
 5. Owned/shared/forbidden paths and remote PR target.
 
 Dispatch sequence:
 
-1. Dev1 receives P2-TASK-01 on `feature/phase-02-contracts`.
-2. Dev2 receives its full handoff and may inspect/read/prepare a test plan, but makes no repository changes yet.
+1. PM creates the Dev1 and Dev2 task branches/worktrees from the same accepted `main` SHA.
+2. Dev1 receives P2-TASK-01 on `feature/phase-02-contracts`; Dev2 receives its full handoff and may inspect/read/prepare a test plan, but makes no repository changes yet.
 3. After P2-TASK-01 is reviewed and merged, PM records the contract SHA.
-4. PM creates the two implementation streams from that same SHA and sends the execution prompts:
+4. PM instructs both implementation streams to sync the exact merged contract `dev` SHA and sends the execution prompts:
    - Dev1: `feature/phase-02-dev1-retrieval-evidence`.
    - Dev2: `feature/phase-02-dev2-generation-api`.
 5. Dev1 and Dev2 execute concurrently and submit separate remote PRs to `dev`.
@@ -468,12 +468,12 @@ Required branch/worktree separation after Phase 2 activation:
 
 | Stream | Branch | Remote Ubuntu worktree | Base |
 |---|---|---|---|
-| Contract gate | `feature/phase-02-contracts` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-contracts` | accepted Phase 1 `dev` SHA |
-| Dev1 | `feature/phase-02-dev1-retrieval-evidence` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev1` | merged contract `dev` SHA |
-| Dev2 | `feature/phase-02-dev2-generation-api` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` | merged contract `dev` SHA |
+| Contract gate | `feature/phase-02-contracts` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-contracts` | accepted Phase 1 `main` SHA |
+| Dev1 | `feature/phase-02-dev1-retrieval-evidence` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev1` | created from accepted `main`; sync merged contract `dev` SHA before writes |
+| Dev2 | `feature/phase-02-dev2-generation-api` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-dev2` | created from accepted `main`; sync merged contract `dev` SHA before writes |
 | Integration | `feature/phase-02-direct-rag-integration` | `/home/bruce/Dev/pre-sales-knowledge-agent-phase2-integration` | `dev` after both Wave 1 PRs merge |
 
-These are task branches, not permanent personal branches. They are archived/deleted after their PR is merged. The coordinator confirms paths are unused before creating worktrees and records exact base SHAs at dispatch time. Do not reuse or clean the active Phase 1 worktree.
+These are task branches, not permanent personal branches. They are archived/deleted after their PR is merged. The coordinator confirms paths are unused before creating worktrees and records the exact accepted `main` and gate `dev` SHAs at dispatch time. Do not reuse or clean an earlier Phase worktree.
 
 Merge order is contract PR, then the two independent Wave 1 PRs after review, then the integration PR. If the second Wave 1 PR conflicts with the first merged PR, its owner rebases/merges the latest `dev`, reruns all checks, and updates the remote PR; the coordinator does not resolve the conflict by copying files between worktrees.
 

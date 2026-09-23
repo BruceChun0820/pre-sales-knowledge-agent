@@ -21,7 +21,7 @@ Before writing code:
 ## Isolation and Ownership
 
 - **One feature at a time:** each worker handles only the Task IDs explicitly assigned in its handoff; parallelism comes from separate workers and worktrees, not scope mixing inside one worker.
-- One task stream uses one dedicated Git worktree and one task branch based on the coordinator-specified `dev` commit.
+- One task stream uses one dedicated Git worktree and one task branch. A new Phase starts from the last accepted `main` commit; after an integration gate, the coordinator may require workers to sync an exact `dev` commit before writes begin.
 - All implementation PRs target `dev`. `main` remains the stable accepted branch.
 - Only the coordinator edits `AGENTS.md`, `feature_list.json`, `progress.md`, phase documents, shared contracts, dependency locks, or cross-stream settings unless a handoff explicitly delegates a named file.
 - Dev workers write task-specific evidence to `docs/handoffs/<TASK-ID>.md` and the remote PR; they do not edit shared status trackers.
@@ -29,10 +29,10 @@ Before writing code:
 
 ## Phase 2 Worker Dispatch
 
-- PM starts Phase 2 by recording the accepted Phase 1 `dev` SHA and explicitly dispatching the Dev1 and Dev2 handoffs.
+- PM starts Phase 2 by recording the promoted Phase 1 `main` SHA and explicitly dispatching the Dev1 and Dev2 handoffs.
 - Dev1 and Dev2 use separate named worktrees and task branches; neither worker works in the Phase 1 checkout or the other worker's worktree.
 - Dev1 completes the contract gate first. Dev2 may perform read-only preparation after dispatch but must not edit code until PM supplies the merged contract SHA.
-- After the contract gate, both implementation branches start from the same `dev` SHA and may execute concurrently within their owned paths.
+- Dev1 and Dev2 branches are initially created from the same accepted `main` SHA. After the contract gate merges to `dev`, both workers sync the coordinator-specified contract commit before production edits and then execute concurrently within owned paths.
 - Each worker pushes only its task branch and opens a remote PR to `dev`; approved PRs are integrated by the coordinator in the documented order.
 
 ## Verification Commands

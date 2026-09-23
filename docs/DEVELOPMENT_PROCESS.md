@@ -59,7 +59,9 @@ PM defines Phase and handoffs
 ### 4.1 Permanent branches
 
 - `main`：稳定、已验收的基线。禁止直接开发和未经 QA 的合并。
-- `dev`：当前开发集成分支。所有 feature/task 分支以它为基线并合回它。
+- `dev`：当前 Phase 的开发集成分支。所有 feature/task PR 合回它；task branch 的起始 commit 由 Phase 协议和 PM 指定。
+
+新 Phase 启动时，PM 先确认 `main` 是上一 Phase 的完整已验收基线。该 Phase 的首批 Dev1/Dev2 task branches 从这个 `main` commit 签出；如 Phase 内存在 contract/integration gate，worker 在开始写入前必须同步 PM 指定的最新 `dev` gate commit。所有 task PR 仍以 `dev` 为目标，Phase 验收后再通过独立 `dev -> main` PR promotion。
 
 ### 4.2 Task branches
 
@@ -75,7 +77,7 @@ docs/phase-01-clarify-metadata-contract
 
 ### 4.3 Merge flow
 
-1. 从最新 `dev` 创建 task branch；
+1. 从 PM 指定的基线创建 task branch：新 Phase 首批分支从已验收 `main` 签出，Phase 内后续分支或写入前同步指定的 `dev` gate commit；
 2. 实现指定 Task，提交测试和文档；
 3. 确认 `origin` 指向用户批准的远程私有仓库；缺失或错误时停止并反馈 PM；
 4. 将 task branch 推送到 `origin`，设置 upstream；

@@ -3,65 +3,54 @@
 ## Current State
 
 - Last Updated: 2026-09-23
-- Current Objective: finish Phase 1 safely, then execute the approved Phase 2 contract-first parallel plan.
-- Active phase: Phase 1 — Document Ingestion + Vector DB
+- Current Objective: preserve the accepted Phase 1 baseline on `main`, then wait for explicit Phase 2 activation.
+- Accepted phase: Phase 1 — Document Ingestion + Vector DB
 - Next planned phase: Phase 2 — Basic RAG Q&A + Citation
-- Planning branch: `docs/phase-02-plan`
-- Planning base: `origin/dev` at `539c8d4`
+- Phase 1 QA: `docs/qa/QA-001.md`, AC-P1-01 through AC-P1-17 PASS
 
 ## Completed
 
 - Phase 0 documentation and architecture baseline.
-- Phase 1 TASK-01 through TASK-05: environment, domain contracts, parsing, deterministic chunking, and embedding benchmark.
-- Multilingual MiniLM selected as the current CPU embedding model based on Phase 1 evidence.
-- Phase 2 parallel work plan, ownership model, handoffs, prompts, and QA matrix prepared.
-- Harness artifacts added: operating guide, machine-readable state, standard verification entrypoint, and handoff convention.
-
-## In Progress
-
-- Phase 1 TASK-06 onward in the separate Phase 1 worktree.
-- Qdrant persistence, activation semantics, complete ingestion orchestration, remote PR, and independent QA remain before Phase 1 acceptance.
+- Phase 1 TASK-01 through TASK-08, including persistent Qdrant, safe version activation, ingestion CLI, and CPU embedding selection.
+- Metadata-only update defect fixed and independently re-tested against live Qdrant.
+- Phase 1 implementation PR #2 merged to `dev`; final QA evidence PR #3 merged to `dev`.
+- Phase 2 plan, ownership, prompts, worktree boundaries, QA matrix, and Harness artifacts completed.
 
 ## Phase 2 Gate
 
-Phase 2 implementation is **BLOCKED** until all of the following are true:
+Phase 1 prerequisites are satisfied. Phase 2 is `READY FOR EXPLICIT ACTIVATION`, not automatically active. PM/user must explicitly start it and provide the accepted `main` SHA.
 
-1. Phase 1 implementation is pushed to a remote PR targeting `dev`.
-2. Phase 1 QA reports `QA PASSED` for the tested remote PR head.
-3. PM accepts Phase 1 and records the accepted `dev` commit.
-4. Dev1 and Dev2 worktrees are created from that same accepted commit.
+At activation:
+
+1. Create Dev1 and Dev2 task branches/worktrees from the same accepted `main` commit.
+2. Dev1 performs the contract gate; Dev2 remains read-only.
+3. After the contract PR merges to `dev`, both workers sync the exact gate commit before production edits.
+4. Each worker submits a separate remote PR to `dev`; final Phase promotion remains `dev -> main` after QA and PM acceptance.
 
 ## Decisions
 
-- Use a coordinator pattern rather than allowing workers to delegate recursively.
-- Freeze Phase 2 public contracts in a small gating PR before parallel implementation.
-- Dev1 owns retrieval/evidence; Dev2 owns generation/API; QA is independent.
-- At Phase 2 activation, PM dispatches both workers; Dev2 remains read-only until the Dev1 contract gate merges, after which both task branches start from the same `dev` SHA.
-- Dev1 and Dev2 use dedicated task-named branches/worktrees and submit separate remote PRs to `dev`.
-- Basic RAG remains a direct service path; Agent/LangGraph begins no earlier than Phase 4.
-- Dense retrieval is the Phase 2 baseline. Query rewrite, reranking, and hybrid search remain Phase 3 experiments.
-
-## Risks
-
-- Phase 1 contracts may still change during Qdrant integration; mitigation: do not start Phase 2 contract freeze until Phase 1 acceptance.
-- Shared-file conflicts can erase parallel work; mitigation: coordinator-only shared trackers/contracts and explicit file ownership.
-- LLM nondeterminism can hide citation defects; mitigation: deterministic fake provider and citation validator are mandatory acceptance paths.
+- Use a coordinator pattern; workers do not spawn workers.
+- The start-of-Phase source of truth is the last accepted `main` commit.
+- `dev` is the within-Phase integration target.
+- Dev1 owns retrieval/evidence; Dev2 owns generation/API; QA remains independent.
+- Direct RAG precedes Agent/LangGraph, and dense retrieval precedes rewrite/rerank/hybrid experiments.
 
 ## Blockers
 
-- Phase 2 implementation is blocked until the Phase 1 remote PR is QA PASSED and PM ACCEPTED.
+- No technical blocker is open.
+- Phase 2 work is intentionally paused until explicit activation.
 
-## Files Modified for Phase 2 Planning
+## Files and Evidence
 
-- Harness control files at repository root.
-- `docs/phases/PHASE-02.md`.
-- Dev1/Dev2 prompts and handoffs under `docs/pr/`.
-- QA handoff under `docs/qa/` and task handoff convention under `docs/handoffs/`.
+- Phase 1 final QA: `docs/qa/QA-001.md`.
+- Phase 2 specification: `docs/phases/PHASE-02.md`.
+- Dev handoffs/prompts: `docs/pr/PHASE-02-DEV1-HANDOFF.md`, `docs/pr/PHASE-02-DEV2-HANDOFF.md`, and matching prompt files.
+- QA plan: `docs/qa/PHASE-02-QA-HANDOFF.md`.
 
 ## Next Session
 
-Check Phase 1 TASK-06–08 and remote PR/QA status before declaring Phase 2 active. At activation, record the accepted SHA and dispatch both worker handoffs using the Phase 2 protocol.
+Confirm `main` is the accepted Phase 1 promotion commit. Do not create or dispatch Phase 2 worktrees until PM/user explicitly starts Phase 2.
 
 ## Recommended Next Step
 
-Finish Phase 1 TASK-06–08, open the remote PR, run QA, and obtain PM acceptance. Then declare Phase 2 active, dispatch Dev1 to the contract gate and Dev2 to read-only preparation, and start both implementation branches from the merged contract SHA.
+Wait for Phase 2 activation. At activation, record the exact `main` SHA, create isolated Dev1/Dev2 worktrees, and execute the contract-first dispatch protocol.
