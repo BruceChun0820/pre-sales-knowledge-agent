@@ -2,7 +2,7 @@
 
 售前知识与方案智能助手：一个面向企业售前团队的、可评估的 RAG + Agent 项目。项目将公开资料与自建模拟售前文档转化为可检索知识库，支持带来源的问答、历史方案检索、跨方案比较、文档总结和 Proposal 大纲辅助生成。
 
-> 当前状态：**Phase 2 — Basic RAG Q&A + Citation / IN DEVELOPMENT**。Phase 1 已验收；Dev1 正在执行 P2-TASK-01 合同门禁，Dev2 当前只做只读准备。所有任务分支从最新 `main` 建立，PR 直接提交到 `main`。
+> 当前状态：**Phase 2 — Basic RAG Q&A + Citation / IN DEVELOPMENT**。P2-TASK-01 已 QA PASS 并合并；Dev1 与 Dev2 进入各自的实现任务。所有任务分支从最新 `main` 建立，PR 直接提交到 `main`。
 
 ## 1. 项目背景
 

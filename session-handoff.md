@@ -2,17 +2,16 @@
 
 ## Current Objective
 
-- Execute the user-authorized Phase 2 from the accepted Phase 1 `main` baseline.
-- Phase 2 starts with Dev1's contract task; Dev2 stays read-only until that PR merges.
+- Execute the user-authorized Phase 2 after the accepted contract gate.
 
 ## Current Status
 
 - Phase 1: QA PASSED and PM ACCEPTED.
 - Final QA evidence: `docs/qa/QA-001.md`.
 - Phase 2: ACTIVE by user authorization on 2026-09-23.
-- Dispatch baseline: `cb31243f410b4eab0f8c240b21622e9324d622b3`.
-- Dev1: P2-TASK-01 contract gate on `feature/phase-02-contracts`.
-- Dev2: read-only preparation on its dedicated task branch/worktree; no code edits until the contract merge SHA is supplied.
+- Contract-gate merge commit: `c6a65e5c06966124eeddf0e55bef71998dafac58`.
+- Dev1: P2-TASK-02, P2-TASK-03, and P2-TASK-06 on `feature/phase-02-dev1-retrieval-evidence`.
+- Dev2: P2-TASK-04 and P2-TASK-05 on `feature/phase-02-dev2-generation-api`.
 
 ## Completed This Session
 
@@ -24,7 +23,7 @@
 ## Blockers / Risks
 
 - No open Phase 1 defect.
-- Both workers begin from the same accepted `main` baseline; after the contract PR merges, both sync the exact new `main` SHA before implementation.
+- Both workers fetch and sync the contract-gate baseline before implementation. P2-TASK-07 remains gated on its documented task dependencies.
 
 ## Files Changed
 
@@ -37,8 +36,8 @@
 1. Read `AGENTS.md`, `feature_list.json`, and `progress.md`.
 2. Confirm the current `main` SHA and a clean checkout.
 3. Run `./init.sh` before any implementation.
-4. Follow the active handoff and keep Dev2 read-only before the contract merge gate.
+4. Verify each worker remains within its owned paths and phase task scope.
 
 ## Recommended Next Step
 
-Dev1 completes P2-TASK-01 and submits a PR to `main`. After QA/PM approval and merge, record the resulting `main` SHA, release Dev1/Dev2 implementation work, and continue with the Phase 2 handoffs.
+Dev1 and Dev2 execute their owned workstreams and submit separate PRs to `main`; PM records the QA-tested merge SHA before dispatching the integration task.

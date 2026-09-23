@@ -2,9 +2,9 @@
 
 ## Status and Entry Gate
 
-`IN DEVELOPMENT — ACTIVE BY USER AUTHORIZATION ON 2026-09-23`. Current gate: Dev1 executes P2-TASK-01; Dev2 is read-only until that contract PR is QA/PM-approved and merged.
+`IN DEVELOPMENT — CONTRACT GATE ACCEPTED`. P2-TASK-01 passed QA on `ffc487b6d7b7a5dd752dbc72024c2db889bb947a` and merged to `main` as `c6a65e5c06966124eeddf0e55bef71998dafac58`. Dev1 and Dev2 may begin their assigned implementation work after syncing that baseline.
 
-Phase 1 is QA PASSED and PM ACCEPTED. Its complete state is promoted to `main`. The user explicitly activated Phase 2. Dispatch baseline for the contract and read-only preparation worktrees: `cb31243f410b4eab0f8c240b21622e9324d622b3`.
+Phase 1 is QA PASSED and PM ACCEPTED. Its complete state is promoted to `main`. The user explicitly activated Phase 2. The contract-gate merge commit is the common implementation baseline: `c6a65e5c06966124eeddf0e55bef71998dafac58`.
 
 ## Objective
 

@@ -34,8 +34,8 @@
       "description": "Define framework-neutral shared contracts and deterministic fakes before parallel implementation.",
       "owner": "Dev1",
       "dependencies": ["P1-TASK-06-08"],
-      "status": "in-progress",
-      "evidence": "Dispatched to Dev1 from main baseline cb31243f410b4eab0f8c240b21622e9324d622b3; docs/phases/PHASE-02.md"
+      "status": "accepted",
+      "evidence": "PR #9 QA PASS on ffc487b6d7b7a5dd752dbc72024c2db889bb947a; merged to main as c6a65e5c06966124eeddf0e55bef71998dafac58; docs/qa/QA-002.md"
     },
     {
       "id": "P2-TASK-02",
@@ -43,7 +43,7 @@
       "description": "Normalize queries and retrieve ranked, filtered, source-aware evidence from the accepted Phase 1 index.",
       "owner": "Dev1",
       "dependencies": ["P2-TASK-01"],
-      "status": "planned",
+      "status": "in-progress",
       "evidence": "docs/pr/PHASE-02-DEV1-HANDOFF.md"
     },
     {
@@ -52,7 +52,7 @@
       "description": "Build bounded deterministic context and enforce evidence sufficiency and citation integrity.",
       "owner": "Dev1",
       "dependencies": ["P2-TASK-02"],
-      "status": "planned",
+      "status": "in-progress",
       "evidence": "docs/pr/PHASE-02-DEV1-HANDOFF.md"
     },
     {
