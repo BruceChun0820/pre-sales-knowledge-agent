@@ -35,6 +35,10 @@
 
 ## Phase 1 — Document Ingestion + Vector DB
 
+### Current Status
+
+`ACCEPTED`. AC-P1-01 through AC-P1-17 passed on the QA-tested PR head; PM accepted the implementation and authorized promotion to `main`. Final evidence is recorded in `docs/qa/QA-001.md`.
+
 ### Goal
 
 从公开/模拟文档稳定生成可追溯 chunks，并写入可重建的 Qdrant index。
@@ -61,6 +65,10 @@
 
 ## Phase 2 — Basic RAG Q&A + Citation
 
+### Current Status
+
+Planned under `docs/phases/PHASE-02.md`. Phase 1 prerequisites are satisfied, but Phase 2 implementation still requires explicit PM/user activation. At activation, Dev1 and Dev2 task branches are cut from the accepted `main` baseline, then follow the contract-first integration gate before parallel implementation.
+
 ### Goal
 
 实现最小、直接、可引用的 Question -> Retrieve -> Generate 流程，不引入 Agent loop。
@@ -82,6 +90,8 @@
 - unanswerable cases 能拒答；
 - baseline retrieval/answer report 可重复运行；
 - 所有 API output 通过 schema validation。
+- 所有实现通过远程 PR 提交到 `dev`，并由 QA 对准确的远程 head SHA 验收；
+- citation validator 能阻止未知引用、无引用事实声明和无依据 quote 返回 `answered`。
 
 ## Phase 3 — Retrieval Optimization + Reranking
 

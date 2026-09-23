@@ -4,7 +4,12 @@
 
 - Phase:
 - Task IDs:
+- Remote repository:
+- PR URL:
+- Source branch:
 - Target branch: `dev`
+- Head commit SHA:
+- PR status: Draft / Open
 
 ## Scope Implemented
 
@@ -29,6 +34,17 @@
 | Unit tests | | |
 | Integration tests | | |
 | Secret/private-data check | | |
+| Remote CI/checks | | |
+
+## Remote PR Checklist
+
+- [ ] `origin` 指向已批准的远程私有仓库
+- [ ] source task branch 已 push 并设置 upstream
+- [ ] PR target 是 `dev`，不是 `main`
+- [ ] PR URL 可由 PM/QA 访问
+- [ ] 当前 head SHA 与本地提交一致
+- [ ] PR 描述包含 Task IDs、AC 对照、测试结果和已知限制
+- [ ] Dev 没有自行 merge PR
 
 ## Architecture / Data Impact
 
@@ -54,4 +70,4 @@
 - [ ] 未提交 secret、私有数据、模型或运行时存储
 - [ ] 未绕过失败测试或降低 Acceptance Criteria
 - [ ] 文档与实现一致
-
+- [ ] 已将 PR 提交到远程批准仓库，未仅保留本地提交

@@ -1,0 +1,235 @@
+{
+  "candidate": {
+    "key": "multilingual-minilm",
+    "model_name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "expected_dimension": 384
+  },
+  "dataset_id": "phase1-embedding-v1",
+  "dataset_checksum": "3d09326857bceda531d2c93b31d3dc8c5b792547d0dae79bd643d189dd54515c",
+  "chunk_count": 12,
+  "query_count": 12,
+  "device": "cpu",
+  "normalized": true,
+  "started_at": "2026-09-23T03:21:22.561262+00:00",
+  "model_load_seconds": 10.127341833000173,
+  "status": "succeeded",
+  "dimension": 384,
+  "max_sequence_length": 128,
+  "tokenizer_behavior": "Sentence-Transformers tokenizer; model truncation applies above max_sequence_length; query/document encoders are used when available.",
+  "indexing_seconds": 0.1218197380003403,
+  "indexing_throughput_chunks_per_second": 98.50620430628803,
+  "query_latency_p50_ms": 7.338490500160333,
+  "query_latency_p95_ms": 10.190775650085016,
+  "estimated_index_size_bytes_float32": 18432,
+  "hit_rate_at_5": 1.0,
+  "recall_at_10": 1.0,
+  "per_query": [
+    {
+      "query_id": "q01",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "aurora-capacity",
+        "factory-case",
+        "aurora-offline",
+        "manufacturing-connectivity",
+        "nimbus-sla",
+        "api-limits",
+        "atlas-encryption",
+        "atlas-residency",
+        "retail-sync",
+        "migration-window"
+      ]
+    },
+    {
+      "query_id": "q02",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "aurora-capacity",
+        "manufacturing-connectivity",
+        "aurora-offline",
+        "atlas-encryption",
+        "atlas-residency",
+        "nimbus-sla",
+        "api-limits",
+        "admin-access",
+        "factory-case",
+        "retail-sync"
+      ]
+    },
+    {
+      "query_id": "q03",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "nimbus-sla",
+        "aurora-capacity",
+        "factory-case",
+        "manufacturing-connectivity",
+        "api-limits",
+        "atlas-encryption",
+        "atlas-residency",
+        "nimbus-export",
+        "aurora-offline",
+        "admin-access"
+      ]
+    },
+    {
+      "query_id": "q04",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "nimbus-export",
+        "nimbus-sla",
+        "aurora-offline",
+        "api-limits",
+        "aurora-capacity",
+        "atlas-residency",
+        "migration-window",
+        "atlas-encryption",
+        "manufacturing-connectivity",
+        "admin-access"
+      ]
+    },
+    {
+      "query_id": "q05",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "manufacturing-connectivity",
+        "aurora-capacity",
+        "factory-case",
+        "nimbus-sla",
+        "retail-sync",
+        "atlas-encryption",
+        "api-limits",
+        "atlas-residency",
+        "admin-access",
+        "aurora-offline"
+      ]
+    },
+    {
+      "query_id": "q06",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "retail-sync",
+        "migration-window",
+        "api-limits",
+        "nimbus-sla",
+        "factory-case",
+        "aurora-offline",
+        "atlas-residency",
+        "admin-access",
+        "atlas-encryption",
+        "manufacturing-connectivity"
+      ]
+    },
+    {
+      "query_id": "q07",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "atlas-encryption",
+        "atlas-residency",
+        "manufacturing-connectivity",
+        "admin-access",
+        "aurora-capacity",
+        "api-limits",
+        "nimbus-sla",
+        "nimbus-export",
+        "aurora-offline",
+        "factory-case"
+      ]
+    },
+    {
+      "query_id": "q08",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "atlas-residency",
+        "atlas-encryption",
+        "aurora-capacity",
+        "admin-access",
+        "nimbus-sla",
+        "aurora-offline",
+        "migration-window",
+        "manufacturing-connectivity",
+        "api-limits",
+        "nimbus-export"
+      ]
+    },
+    {
+      "query_id": "q09",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "migration-window",
+        "retail-sync",
+        "factory-case",
+        "api-limits",
+        "aurora-capacity",
+        "atlas-residency",
+        "nimbus-sla",
+        "aurora-offline",
+        "atlas-encryption",
+        "nimbus-export"
+      ]
+    },
+    {
+      "query_id": "q10",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "factory-case",
+        "retail-sync",
+        "nimbus-sla",
+        "migration-window",
+        "api-limits",
+        "atlas-encryption",
+        "aurora-capacity",
+        "aurora-offline",
+        "manufacturing-connectivity",
+        "atlas-residency"
+      ]
+    },
+    {
+      "query_id": "q11",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "admin-access",
+        "atlas-residency",
+        "factory-case",
+        "nimbus-sla",
+        "manufacturing-connectivity",
+        "aurora-capacity",
+        "atlas-encryption",
+        "api-limits",
+        "migration-window",
+        "retail-sync"
+      ]
+    },
+    {
+      "query_id": "q12",
+      "hit_at_5": true,
+      "recall_at_10": 1.0,
+      "top_chunk_ids": [
+        "api-limits",
+        "retail-sync",
+        "aurora-capacity",
+        "nimbus-sla",
+        "manufacturing-connectivity",
+        "atlas-encryption",
+        "factory-case",
+        "migration-window",
+        "admin-access",
+        "atlas-residency"
+      ]
+    }
+  ],
+  "peak_rss_mb": 1384.28515625,
+  "finished_at": "2026-09-23T03:21:32.901320+00:00"
+}

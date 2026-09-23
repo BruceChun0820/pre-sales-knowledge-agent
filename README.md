@@ -2,7 +2,7 @@
 
 售前知识与方案智能助手：一个面向企业售前团队的、可评估的 RAG + Agent 项目。项目将公开资料与自建模拟售前文档转化为可检索知识库，支持带来源的问答、历史方案检索、跨方案比较、文档总结和 Proposal 大纲辅助生成。
 
-> 当前状态：**Phase 1 — Document Ingestion + Vector DB / PLANNED**。Phase 0 文档与架构基线已完成；Phase 1 的任务定义和 Dev/QA 交接已就绪，等待用户授权开发。尚未安装项目依赖、启动 Qdrant、调用 LLM，或实现业务代码。
+> 当前状态：**Phase 1 — Document Ingestion + Vector DB / ACCEPTED**。AC-P1-01～17 已通过独立 QA，最终报告见 `docs/qa/QA-001.md`。Phase 2 规划与 Dev1/Dev2 handoff 已完成，但尚未开始业务实现。
 
 ## 1. 项目背景
 
@@ -84,7 +84,7 @@ Basic RAG 阶段使用普通 Python service 显式编排；进入 Tool Calling �
 | Agent | LangGraph（Phase 4 起） | 显式状态图、可限制循环、适合确定性步骤与 LLM 步骤混合 |
 | LLM | OpenAI-compatible API，通过自有 adapter | 不把业务层绑定到单一供应商 |
 | Parsing | PyMuPDF + python-docx + 标准库 | 先覆盖数字文本；OCR 后置 |
-| Embedding | BGE-M3 候选；轻量多语模型作为 CPU baseline | 以中文/英文评测和 VM 延迟决定最终模型 |
+| Embedding | sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2（revision 固定） | CPU 双语基准胜出；对比结果见 TASK-05 报告 |
 | Vector DB | Qdrant | 持久化、payload filter、dense/sparse/hybrid 演进路径 |
 | Reranker | BGE Cross-Encoder 候选，按实验启用 | CPU 环境下必须证明质量增益值得延迟成本 |
 | Evaluation | 自建 JSONL harness + pytest；Ragas 可选 | 客观指标优先，LLM-as-judge 只作补充 |
@@ -123,15 +123,15 @@ pre-sales-knowledge-agent/
 └── README.md
 ```
 
-目录目前为空骨架，业务代码将在 Phase 1 经确认后开始。
+Phase 1 已包含四种格式的合成样例与显式 metadata。启动 Qdrant 后，可用 `.venv/bin/python -m app.rag.ingestion.cli --data-root data/samples --metadata evaluation/configs/phase1_sample_metadata.json --manifest data/processed/phase1-sample-manifest.jsonl` 执行一次入库；依赖与模型环境见 [Dependency Baseline](docs/DEPENDENCY_BASELINE.md)。
 
 ## 8. 开发阶段
 
 | Phase | 主题 | 当前状态 |
 |---|---|---|
 | 0 | Documentation & Architecture | 已完成并建立 Git 基线 |
-| 1 | Document Ingestion + Vector DB | PLANNED，Handoff 已就绪，尚未授权开发 |
-| 2 | Basic RAG Q&A + Citation | 未开始 |
+| 1 | Document Ingestion + Vector DB | ACCEPTED；QA-001 全部通过 |
+| 2 | Basic RAG Q&A + Citation | PLANNED；等待 PM 明确启动 |
 | 3 | Retrieval Optimization + Reranking | 未开始 |
 | 4 | Agent Tool Calling + ReAct | 未开始 |
 | 5 | Formal Evaluation | 未开始；评测基础从 Phase 1 建立 |
@@ -160,5 +160,8 @@ pre-sales-knowledge-agent/
 - [x] Git `main` / `dev` 工作流已定义
 - [x] Phase 1 Objective、Scope、Tasks、Acceptance Criteria 与 Quality Gates 已定义
 - [x] Phase 1 Dev/QA Handoff 已准备
-- [ ] Dev 尚未开始 Phase 1 实现
-- [ ] QA 尚未开始 Phase 1 验收
+- [x] Dev 已完成 Phase 1 实现并提交待 QA 的 PR
+- [x] QA 已完成 Phase 1 验收，AC-P1-01～17 全部 PASS
+- [x] PM 已接受 Phase 1 并批准 promotion 至 `main`
+- [x] Phase 2 Harness、任务拆分、Dev1/Dev2 与 QA handoff 已完成
+- [ ] Phase 2 尚未获得明确启动指令

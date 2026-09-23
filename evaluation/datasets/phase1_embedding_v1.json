@@ -1,0 +1,153 @@
+{
+  "dataset_id": "phase1-embedding-v1",
+  "review_status": "developer-reviewed",
+  "provenance": "Synthetic pre-sales product and solution statements created for Phase 1 evaluation.",
+  "chunks": [
+    {
+      "chunk_id": "aurora-offline",
+      "document_id": "aurora-guide",
+      "text": "Aurora Edge X-200 supports offline deployment. Offline mode does not include automatic cloud upgrades and requires quarterly manual patches."
+    },
+    {
+      "chunk_id": "aurora-capacity",
+      "document_id": "aurora-guide",
+      "text": "Each Aurora Edge X-200 node supports up to 500 concurrent devices. Capacity is not unlimited; larger deployments require additional nodes."
+    },
+    {
+      "chunk_id": "nimbus-sla",
+      "document_id": "nimbus-guide",
+      "text": "Nimbus Insight has a 99.9% availability target. Planned maintenance and customer network outages are excluded from the target."
+    },
+    {
+      "chunk_id": "nimbus-export",
+      "document_id": "nimbus-guide",
+      "text": "Nimbus Insight v2.1 exports CSV and JSON. It does not support bulk PDF export."
+    },
+    {
+      "chunk_id": "manufacturing-connectivity",
+      "document_id": "manufacturing-solution",
+      "text": "生产线方案支持 OPC UA 和 Modbus。单网关最多连接 128 个传感器，不支持无线设备自动配网。"
+    },
+    {
+      "chunk_id": "retail-sync",
+      "document_id": "retail-solution",
+      "text": "零售门店方案每 15 分钟同步库存。断网时可缓存 24 小时，网络恢复后自动补传。"
+    },
+    {
+      "chunk_id": "atlas-encryption",
+      "document_id": "atlas-security",
+      "text": "Atlas Vault uses AES-256 encryption at rest and TLS 1.3 in transit. Customer-managed encryption keys are supported."
+    },
+    {
+      "chunk_id": "atlas-residency",
+      "document_id": "atlas-security",
+      "text": "Atlas Vault 数据驻留区域仅限法兰克福和新加坡，不支持跨区域自动复制。"
+    },
+    {
+      "chunk_id": "migration-window",
+      "document_id": "implementation-guide",
+      "text": "A standard migration takes 3 to 5 business days. The rollback snapshot is retained for 7 days."
+    },
+    {
+      "chunk_id": "factory-case",
+      "document_id": "factory-case-study",
+      "text": "A synthetic factory reported an 18% downtime reduction during a 12-week pilot. This result is not guaranteed for other deployments."
+    },
+    {
+      "chunk_id": "admin-access",
+      "document_id": "security-guide",
+      "text": "Administrator access supports SAML 2.0 single sign-on and requires multi-factor authentication."
+    },
+    {
+      "chunk_id": "api-limits",
+      "document_id": "integration-guide",
+      "text": "The REST API limit is 100 requests per second and returns HTTP 429 above the limit. Webhooks use at-least-once delivery, so duplicates are possible."
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "q01",
+      "text": "X-200 离线部署有什么升级限制？",
+      "relevant_chunk_ids": [
+        "aurora-offline"
+      ]
+    },
+    {
+      "query_id": "q02",
+      "text": "How many devices can one Aurora node support?",
+      "relevant_chunk_ids": [
+        "aurora-capacity"
+      ]
+    },
+    {
+      "query_id": "q03",
+      "text": "Nimbus 99.9% 可用性不包括哪些情况？",
+      "relevant_chunk_ids": [
+        "nimbus-sla"
+      ]
+    },
+    {
+      "query_id": "q04",
+      "text": "Does Nimbus v2.1 provide bulk PDF export?",
+      "relevant_chunk_ids": [
+        "nimbus-export"
+      ]
+    },
+    {
+      "query_id": "q05",
+      "text": "制造业网关支持哪些工业协议，传感器上限是多少？",
+      "relevant_chunk_ids": [
+        "manufacturing-connectivity"
+      ]
+    },
+    {
+      "query_id": "q06",
+      "text": "How long can retail stores cache inventory updates while offline?",
+      "relevant_chunk_ids": [
+        "retail-sync"
+      ]
+    },
+    {
+      "query_id": "q07",
+      "text": "Atlas Vault 使用什么静态和传输加密？",
+      "relevant_chunk_ids": [
+        "atlas-encryption"
+      ]
+    },
+    {
+      "query_id": "q08",
+      "text": "Which data residency regions are available for Atlas Vault?",
+      "relevant_chunk_ids": [
+        "atlas-residency"
+      ]
+    },
+    {
+      "query_id": "q09",
+      "text": "迁移通常需要几天，回滚快照保留多久？",
+      "relevant_chunk_ids": [
+        "migration-window"
+      ]
+    },
+    {
+      "query_id": "q10",
+      "text": "Was the 18 percent downtime reduction guaranteed?",
+      "relevant_chunk_ids": [
+        "factory-case"
+      ]
+    },
+    {
+      "query_id": "q11",
+      "text": "管理员登录是否必须使用多因素认证？",
+      "relevant_chunk_ids": [
+        "admin-access"
+      ]
+    },
+    {
+      "query_id": "q12",
+      "text": "What happens when API traffic exceeds 100 requests per second?",
+      "relevant_chunk_ids": [
+        "api-limits"
+      ]
+    }
+  ]
+}

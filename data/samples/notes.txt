@@ -1,0 +1,3 @@
+Synthetic reference note for parser and ingestion smoke tests.
+Fictional Product Atlas supports finance workflows.
+This sample contains no customer or company information.
