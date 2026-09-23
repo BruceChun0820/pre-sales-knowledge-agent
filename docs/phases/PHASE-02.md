@@ -2,9 +2,9 @@
 
 ## Status and Entry Gate
 
-`PLANNED — READY FOR EXPLICIT ACTIVATION`.
+`IN DEVELOPMENT — ACTIVE BY USER AUTHORIZATION ON 2026-09-23`. Current gate: Dev1 executes P2-TASK-01; Dev2 is read-only until that contract PR is QA/PM-approved and merged.
 
-Phase 1 is QA PASSED and PM ACCEPTED. Its complete state is promoted to `main`. No Phase 2 production implementation begins until PM/user explicitly declares Phase 2 active. At activation, the promoted Phase 1 `main` SHA is the common checkout baseline for Dev1 and Dev2.
+Phase 1 is QA PASSED and PM ACCEPTED. Its complete state is promoted to `main`. The user explicitly activated Phase 2. Dispatch baseline for the contract and read-only preparation worktrees: `cb31243f410b4eab0f8c240b21622e9324d622b3`.
 
 ## Objective
 
