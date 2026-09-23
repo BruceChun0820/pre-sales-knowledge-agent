@@ -22,6 +22,21 @@ class DocumentParser(Protocol):
         """Parse a source path without exposing parser SDK types to callers."""
 
 
+class TextCleaner(Protocol):
+    """Normalize parsed text conservatively without changing source meaning."""
+
+    @property
+    def name(self) -> str:
+        """Return the stable cleaner name."""
+
+    @property
+    def version(self) -> str:
+        """Return the cleaner implementation version."""
+
+    def clean(self, blocks: Sequence[ParsedBlock]) -> Sequence[ParsedBlock]:
+        """Return ordered blocks with deterministic text normalization."""
+
+
 class ChunkingStrategy(Protocol):
     """Convert parsed blocks into deterministic, source-preserving chunks."""
 
@@ -38,6 +53,7 @@ class ChunkingStrategy(Protocol):
         blocks: Sequence[ParsedBlock],
         *,
         document: DocumentRecord,
+        cleaner_version: str,
     ) -> Sequence[Chunk]:
         """Chunk ordered blocks without changing their source meaning or provenance."""
 

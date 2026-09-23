@@ -214,6 +214,7 @@ class Chunk(DomainModel):
     document_version: DocumentVersion
     chunk_id: NonEmptyString
     text: NonEmptyString
+    text_checksum: Sha256Checksum
     source_location: SourceLocation
     title: NonEmptyString
     source_uri: NonEmptyString

@@ -13,6 +13,9 @@ def test_settings_have_safe_defaults_without_a_secret() -> None:
     assert settings.qdrant_url == "http://localhost:6333"
     assert settings.qdrant_api_key is None
     assert settings.data_root.as_posix() == "data/raw"
+    assert settings.chunk_target_tokens == 512
+    assert settings.chunk_max_tokens == 512
+    assert settings.chunk_overlap_tokens == 64
 
 
 def test_settings_load_environment_values(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -38,5 +41,17 @@ def test_settings_reject_invalid_controlled_values(monkeypatch: pytest.MonkeyPat
 
     monkeypatch.setenv("TENANT_ID", "demo")
     monkeypatch.setenv("MAX_FILE_SIZE_MB", "0")
+    with pytest.raises(ValidationError):
+        Settings(_env_file=None)
+
+
+def test_settings_reject_inconsistent_chunk_limits(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("CHUNK_TARGET_TOKENS", "513")
+    monkeypatch.setenv("CHUNK_MAX_TOKENS", "512")
+    with pytest.raises(ValidationError):
+        Settings(_env_file=None)
+
+    monkeypatch.setenv("CHUNK_TARGET_TOKENS", "512")
+    monkeypatch.setenv("CHUNK_OVERLAP_TOKENS", "512")
     with pytest.raises(ValidationError):
         Settings(_env_file=None)

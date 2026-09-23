@@ -42,6 +42,7 @@ def chunk_kwargs() -> dict[str, object]:
         "document_version": "sha256-v1",
         "chunk_id": "chunk-001",
         "text": "A source-preserving chunk.",
+        "text_checksum": CHECKSUM,
         "source_location": {"page_start": 1, "page_end": 1},
         "title": "Synthetic guide",
         "source_uri": "data/samples/guide.md",

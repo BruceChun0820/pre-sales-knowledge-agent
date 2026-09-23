@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Literal
 
-from pydantic import AnyHttpUrl, Field, SecretStr, field_validator
+from pydantic import AnyHttpUrl, Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -30,7 +30,19 @@ class Settings(BaseSettings):
     parser_version: str = Field(default="parser-v1", min_length=1, max_length=64)
     cleaner_version: str = Field(default="cleaner-v1", min_length=1, max_length=64)
     chunker_version: str = Field(default="chunker-v1", min_length=1, max_length=64)
+    chunk_target_tokens: int = Field(default=512, ge=1)
+    chunk_max_tokens: int = Field(default=512, ge=1)
+    chunk_overlap_tokens: int = Field(default=64, ge=0)
+    chunk_allow_cross_top_level_sections: bool = False
     max_file_size_mb: int = Field(default=50, ge=1, le=1024)
+
+    @model_validator(mode="after")
+    def validate_chunking_limits(self) -> Settings:
+        if self.chunk_target_tokens > self.chunk_max_tokens:
+            raise ValueError("chunk_target_tokens must not exceed chunk_max_tokens")
+        if self.chunk_overlap_tokens >= self.chunk_max_tokens:
+            raise ValueError("chunk_overlap_tokens must be less than chunk_max_tokens")
+        return self
 
     @field_validator("qdrant_url")
     @classmethod
