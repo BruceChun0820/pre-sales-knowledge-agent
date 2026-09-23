@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "dataset_id": "phase2-sample-acceptance-v1",
+  "review_status": "developer-reviewed",
+  "provenance": "Developer-reviewed questions over the public synthetic Phase 1 sample acceptance collection; contains no private company or customer material.",
+  "corpus": {
+    "qdrant_collection": "phase1_sample_acceptance",
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "embedding_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "embedding_dimension": 384,
+    "expected_active_points": 4
+  },
+  "retrieval_config": {
+    "candidate_k": 10,
+    "filters": {
+      "industry": ["finance"],
+      "document_type": "product_guide",
+      "products": ["Product Atlas"]
+    },
+    "score_tolerance": 0.00001
+  },
+  "cases": [
+    {
+      "case_id": "availability-target",
+      "query": "What monthly availability target does Product Atlas set?",
+      "expected_chunk_ids": [
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4",
+        "chunk-3d64cc644525a1c1c21562b4"
+      ],
+      "unanswerable": false,
+      "slices": ["availability", "multi_source"]
+    },
+    {
+      "case_id": "availability-guarantee",
+      "query": "Does Product Atlas guarantee uninterrupted service?",
+      "expected_chunk_ids": [
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4",
+        "chunk-3d64cc644525a1c1c21562b4"
+      ],
+      "unanswerable": false,
+      "slices": ["negation", "availability", "multi_source"]
+    },
+    {
+      "case_id": "product-note",
+      "query": "Which product does the parser smoke-test note describe?",
+      "expected_chunk_ids": ["chunk-713001b093ebc071c3c843c2"],
+      "unanswerable": false,
+      "slices": ["document_identity", "single_source"]
+    },
+    {
+      "case_id": "unsupported-encryption",
+      "query": "Does Product Atlas promise AES-256 encryption at rest?",
+      "expected_chunk_ids": [],
+      "unanswerable": true,
+      "slices": ["unanswerable", "unsupported_detail"]
+    },
+    {
+      "case_id": "one-hundred-percent",
+      "query": "Does Product Atlas promise 100 percent monthly availability?",
+      "expected_chunk_ids": [
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4",
+        "chunk-3d64cc644525a1c1c21562b4"
+      ],
+      "unanswerable": false,
+      "slices": ["number", "negation", "availability"]
+    }
+  ]
+}

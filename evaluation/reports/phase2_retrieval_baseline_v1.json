@@ -1,0 +1,746 @@
+{
+  "case_issues": [
+    {
+      "case_id": "unsupported-encryption",
+      "issues": [
+        {
+          "candidate_count": 4,
+          "code": "unanswerable_candidates_returned"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "best_score": 0.6681246447364008,
+      "case_id": "availability-target",
+      "expected_chunk_ids": [
+        "chunk-3d64cc644525a1c1c21562b4",
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4"
+      ],
+      "failure": null,
+      "hit_rate_at_5": true,
+      "issues": [],
+      "latency_ms": 164.02147800545208,
+      "missing_expected_chunk_ids": [],
+      "recall_at_10": 1.0,
+      "reciprocal_rank": 1.0,
+      "repeat_check": {
+        "max_score_delta": 0.0,
+        "ordered_chunk_ids_match": true,
+        "passed": true
+      },
+      "retrieved": [
+        {
+          "chunk_id": "chunk-edc2ff1412ce5677e494c1e4",
+          "document_id": "doc-e39cbcf44f0d559c",
+          "document_version": "sha256-5f409f8d2d9e8b5cdf94c3e5aef30fdd1c845aa93946c1c4d2132ba5c0150b11",
+          "rank": 1,
+          "score": 0.6681246447364008,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": 1,
+            "page_start": 1,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "guide.pdf"
+        },
+        {
+          "chunk_id": "chunk-e139996f28d49035d65fa744",
+          "document_id": "doc-dc0dbe13416a77d1",
+          "document_version": "sha256-288ab40713d69e1af0982cda0ec0d45c836ec4ce276a90c7efd25feece0a55c4",
+          "rank": 2,
+          "score": 0.5870028840484182,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 7,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": [
+              "Synthetic product guide"
+            ]
+          },
+          "source_uri": "guide.md"
+        },
+        {
+          "chunk_id": "chunk-3d64cc644525a1c1c21562b4",
+          "document_id": "doc-c7f1ef20bcdb0a38",
+          "document_version": "sha256-82dbef9a1147020294897760dcb08a780f4ecfa31fa8c38f403789707fc5b513",
+          "rank": 3,
+          "score": 0.5474672116018009,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": 3,
+            "paragraph_start": 1,
+            "section_path": [
+              "Synthetic Product Atlas"
+            ]
+          },
+          "source_uri": "guide.docx"
+        },
+        {
+          "chunk_id": "chunk-713001b093ebc071c3c843c2",
+          "document_id": "doc-e39538e7f27a7bf5",
+          "document_version": "sha256-f77579724c1cc0e6b730193116af98d201ddf6960925fcbc1045e2b374c93f1c",
+          "rank": 4,
+          "score": 0.29554821553294536,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 3,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "notes.txt"
+        }
+      ],
+      "retrieved_expected_chunk_ids": [
+        "chunk-3d64cc644525a1c1c21562b4",
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4"
+      ],
+      "slices": [
+        "availability",
+        "multi_source"
+      ],
+      "status": "succeeded",
+      "unanswerable": false,
+      "unanswerable_returned_candidates": null
+    },
+    {
+      "best_score": 0.6590276829102056,
+      "case_id": "availability-guarantee",
+      "expected_chunk_ids": [
+        "chunk-3d64cc644525a1c1c21562b4",
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4"
+      ],
+      "failure": null,
+      "hit_rate_at_5": true,
+      "issues": [],
+      "latency_ms": 27.668176000588574,
+      "missing_expected_chunk_ids": [],
+      "recall_at_10": 1.0,
+      "reciprocal_rank": 1.0,
+      "repeat_check": {
+        "max_score_delta": 0.0,
+        "ordered_chunk_ids_match": true,
+        "passed": true
+      },
+      "retrieved": [
+        {
+          "chunk_id": "chunk-e139996f28d49035d65fa744",
+          "document_id": "doc-dc0dbe13416a77d1",
+          "document_version": "sha256-288ab40713d69e1af0982cda0ec0d45c836ec4ce276a90c7efd25feece0a55c4",
+          "rank": 1,
+          "score": 0.6590276829102056,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 7,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": [
+              "Synthetic product guide"
+            ]
+          },
+          "source_uri": "guide.md"
+        },
+        {
+          "chunk_id": "chunk-edc2ff1412ce5677e494c1e4",
+          "document_id": "doc-e39cbcf44f0d559c",
+          "document_version": "sha256-5f409f8d2d9e8b5cdf94c3e5aef30fdd1c845aa93946c1c4d2132ba5c0150b11",
+          "rank": 2,
+          "score": 0.567856403766137,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": 1,
+            "page_start": 1,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "guide.pdf"
+        },
+        {
+          "chunk_id": "chunk-3d64cc644525a1c1c21562b4",
+          "document_id": "doc-c7f1ef20bcdb0a38",
+          "document_version": "sha256-82dbef9a1147020294897760dcb08a780f4ecfa31fa8c38f403789707fc5b513",
+          "rank": 3,
+          "score": 0.5610856052559005,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": 3,
+            "paragraph_start": 1,
+            "section_path": [
+              "Synthetic Product Atlas"
+            ]
+          },
+          "source_uri": "guide.docx"
+        },
+        {
+          "chunk_id": "chunk-713001b093ebc071c3c843c2",
+          "document_id": "doc-e39538e7f27a7bf5",
+          "document_version": "sha256-f77579724c1cc0e6b730193116af98d201ddf6960925fcbc1045e2b374c93f1c",
+          "rank": 4,
+          "score": 0.31521671319954514,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 3,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "notes.txt"
+        }
+      ],
+      "retrieved_expected_chunk_ids": [
+        "chunk-3d64cc644525a1c1c21562b4",
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4"
+      ],
+      "slices": [
+        "negation",
+        "availability",
+        "multi_source"
+      ],
+      "status": "succeeded",
+      "unanswerable": false,
+      "unanswerable_returned_candidates": null
+    },
+    {
+      "best_score": 0.6758257072674458,
+      "case_id": "product-note",
+      "expected_chunk_ids": [
+        "chunk-713001b093ebc071c3c843c2"
+      ],
+      "failure": null,
+      "hit_rate_at_5": true,
+      "issues": [],
+      "latency_ms": 28.962439006136265,
+      "missing_expected_chunk_ids": [],
+      "recall_at_10": 1.0,
+      "reciprocal_rank": 1.0,
+      "repeat_check": {
+        "max_score_delta": 0.0,
+        "ordered_chunk_ids_match": true,
+        "passed": true
+      },
+      "retrieved": [
+        {
+          "chunk_id": "chunk-713001b093ebc071c3c843c2",
+          "document_id": "doc-e39538e7f27a7bf5",
+          "document_version": "sha256-f77579724c1cc0e6b730193116af98d201ddf6960925fcbc1045e2b374c93f1c",
+          "rank": 1,
+          "score": 0.6758257072674458,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 3,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "notes.txt"
+        },
+        {
+          "chunk_id": "chunk-3d64cc644525a1c1c21562b4",
+          "document_id": "doc-c7f1ef20bcdb0a38",
+          "document_version": "sha256-82dbef9a1147020294897760dcb08a780f4ecfa31fa8c38f403789707fc5b513",
+          "rank": 2,
+          "score": 0.5483866771241366,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": 3,
+            "paragraph_start": 1,
+            "section_path": [
+              "Synthetic Product Atlas"
+            ]
+          },
+          "source_uri": "guide.docx"
+        },
+        {
+          "chunk_id": "chunk-edc2ff1412ce5677e494c1e4",
+          "document_id": "doc-e39cbcf44f0d559c",
+          "document_version": "sha256-5f409f8d2d9e8b5cdf94c3e5aef30fdd1c845aa93946c1c4d2132ba5c0150b11",
+          "rank": 3,
+          "score": 0.2980593958429159,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": 1,
+            "page_start": 1,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "guide.pdf"
+        },
+        {
+          "chunk_id": "chunk-e139996f28d49035d65fa744",
+          "document_id": "doc-dc0dbe13416a77d1",
+          "document_version": "sha256-288ab40713d69e1af0982cda0ec0d45c836ec4ce276a90c7efd25feece0a55c4",
+          "rank": 4,
+          "score": 0.2754306309357675,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 7,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": [
+              "Synthetic product guide"
+            ]
+          },
+          "source_uri": "guide.md"
+        }
+      ],
+      "retrieved_expected_chunk_ids": [
+        "chunk-713001b093ebc071c3c843c2"
+      ],
+      "slices": [
+        "document_identity",
+        "single_source"
+      ],
+      "status": "succeeded",
+      "unanswerable": false,
+      "unanswerable_returned_candidates": null
+    },
+    {
+      "best_score": 0.38966333885625204,
+      "case_id": "unsupported-encryption",
+      "expected_chunk_ids": [],
+      "failure": null,
+      "hit_rate_at_5": null,
+      "issues": [
+        {
+          "candidate_count": 4,
+          "code": "unanswerable_candidates_returned"
+        }
+      ],
+      "latency_ms": 28.273926000110805,
+      "missing_expected_chunk_ids": [],
+      "recall_at_10": null,
+      "reciprocal_rank": null,
+      "repeat_check": {
+        "max_score_delta": 0.0,
+        "ordered_chunk_ids_match": true,
+        "passed": true
+      },
+      "retrieved": [
+        {
+          "chunk_id": "chunk-e139996f28d49035d65fa744",
+          "document_id": "doc-dc0dbe13416a77d1",
+          "document_version": "sha256-288ab40713d69e1af0982cda0ec0d45c836ec4ce276a90c7efd25feece0a55c4",
+          "rank": 1,
+          "score": 0.38966333885625204,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 7,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": [
+              "Synthetic product guide"
+            ]
+          },
+          "source_uri": "guide.md"
+        },
+        {
+          "chunk_id": "chunk-edc2ff1412ce5677e494c1e4",
+          "document_id": "doc-e39cbcf44f0d559c",
+          "document_version": "sha256-5f409f8d2d9e8b5cdf94c3e5aef30fdd1c845aa93946c1c4d2132ba5c0150b11",
+          "rank": 2,
+          "score": 0.3825517268082792,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": 1,
+            "page_start": 1,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "guide.pdf"
+        },
+        {
+          "chunk_id": "chunk-3d64cc644525a1c1c21562b4",
+          "document_id": "doc-c7f1ef20bcdb0a38",
+          "document_version": "sha256-82dbef9a1147020294897760dcb08a780f4ecfa31fa8c38f403789707fc5b513",
+          "rank": 3,
+          "score": 0.30178288886764176,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": 3,
+            "paragraph_start": 1,
+            "section_path": [
+              "Synthetic Product Atlas"
+            ]
+          },
+          "source_uri": "guide.docx"
+        },
+        {
+          "chunk_id": "chunk-713001b093ebc071c3c843c2",
+          "document_id": "doc-e39538e7f27a7bf5",
+          "document_version": "sha256-f77579724c1cc0e6b730193116af98d201ddf6960925fcbc1045e2b374c93f1c",
+          "rank": 4,
+          "score": 0.13867746305720435,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 3,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "notes.txt"
+        }
+      ],
+      "retrieved_expected_chunk_ids": [],
+      "slices": [
+        "unanswerable",
+        "unsupported_detail"
+      ],
+      "status": "succeeded",
+      "unanswerable": true,
+      "unanswerable_returned_candidates": 4
+    },
+    {
+      "best_score": 0.7079247556496127,
+      "case_id": "one-hundred-percent",
+      "expected_chunk_ids": [
+        "chunk-3d64cc644525a1c1c21562b4",
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4"
+      ],
+      "failure": null,
+      "hit_rate_at_5": true,
+      "issues": [],
+      "latency_ms": 27.093202996184118,
+      "missing_expected_chunk_ids": [],
+      "recall_at_10": 1.0,
+      "reciprocal_rank": 1.0,
+      "repeat_check": {
+        "max_score_delta": 0.0,
+        "ordered_chunk_ids_match": true,
+        "passed": true
+      },
+      "retrieved": [
+        {
+          "chunk_id": "chunk-edc2ff1412ce5677e494c1e4",
+          "document_id": "doc-e39cbcf44f0d559c",
+          "document_version": "sha256-5f409f8d2d9e8b5cdf94c3e5aef30fdd1c845aa93946c1c4d2132ba5c0150b11",
+          "rank": 1,
+          "score": 0.7079247556496127,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": 1,
+            "page_start": 1,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "guide.pdf"
+        },
+        {
+          "chunk_id": "chunk-e139996f28d49035d65fa744",
+          "document_id": "doc-dc0dbe13416a77d1",
+          "document_version": "sha256-288ab40713d69e1af0982cda0ec0d45c836ec4ce276a90c7efd25feece0a55c4",
+          "rank": 2,
+          "score": 0.5960928681892936,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 7,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": [
+              "Synthetic product guide"
+            ]
+          },
+          "source_uri": "guide.md"
+        },
+        {
+          "chunk_id": "chunk-3d64cc644525a1c1c21562b4",
+          "document_id": "doc-c7f1ef20bcdb0a38",
+          "document_version": "sha256-82dbef9a1147020294897760dcb08a780f4ecfa31fa8c38f403789707fc5b513",
+          "rank": 3,
+          "score": 0.5685665989927934,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": null,
+            "line_start": null,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": 3,
+            "paragraph_start": 1,
+            "section_path": [
+              "Synthetic Product Atlas"
+            ]
+          },
+          "source_uri": "guide.docx"
+        },
+        {
+          "chunk_id": "chunk-713001b093ebc071c3c843c2",
+          "document_id": "doc-e39538e7f27a7bf5",
+          "document_version": "sha256-f77579724c1cc0e6b730193116af98d201ddf6960925fcbc1045e2b374c93f1c",
+          "rank": 4,
+          "score": 0.2948935159427065,
+          "source_location": {
+            "char_end": null,
+            "char_start": null,
+            "line_end": 3,
+            "line_start": 1,
+            "page_end": null,
+            "page_start": null,
+            "paragraph_end": null,
+            "paragraph_start": null,
+            "section_path": []
+          },
+          "source_uri": "notes.txt"
+        }
+      ],
+      "retrieved_expected_chunk_ids": [
+        "chunk-3d64cc644525a1c1c21562b4",
+        "chunk-e139996f28d49035d65fa744",
+        "chunk-edc2ff1412ce5677e494c1e4"
+      ],
+      "slices": [
+        "number",
+        "negation",
+        "availability"
+      ],
+      "status": "succeeded",
+      "unanswerable": false,
+      "unanswerable_returned_candidates": null
+    }
+  ],
+  "code_revision": "2fb53342fb9b8fef48f8c1bafebee9524099534e",
+  "configuration": {
+    "aggregation": "macro average over answerable cases",
+    "candidate_k": 10,
+    "deterministic_tolerance": "ordered chunk IDs exact; score delta <= score_repeat_tolerance; latency is informational and is not compared.",
+    "filters": {
+      "document_type": "product_guide",
+      "industry": [
+        "finance"
+      ],
+      "products": [
+        "Product Atlas"
+      ]
+    },
+    "query_normalization": "NFKC + trim; no rewrite",
+    "retrieval": "dense only; Qdrant order preserved; no reranker or hybrid search",
+    "score_method": "Re-embed returned candidates using the exact indexed model revision to populate score metadata; preserve Qdrant's dense result order.",
+    "score_metric": "cosine",
+    "score_repeat_tolerance": 1e-05
+  },
+  "corpus": {
+    "active_payload_fingerprint_sha256": "f7e15ca49411fcd2f9f4bdf98ba87b41eb214b7d5197bfce854fd059131b2017",
+    "active_point_count": 4,
+    "chunk_config": {
+      "ingestion_time_config_persisted": false,
+      "note": "Runtime values are current Settings; Phase 1 payloads retain only chunker version, not numeric ingestion settings.",
+      "runtime_settings": {
+        "max_tokens": 512,
+        "overlap_tokens": 64,
+        "target_tokens": 512
+      }
+    },
+    "chunk_versions": {
+      "chunker_version": [
+        "chunker-v1"
+      ],
+      "cleaner_version": [
+        "cleaner-v1"
+      ],
+      "parser_version": [
+        "docx-v1",
+        "markdown-v1",
+        "pdf-v1",
+        "text-v1"
+      ]
+    },
+    "collection": "phase1_sample_acceptance",
+    "qdrant_url": "http://localhost:6333"
+  },
+  "dataset": {
+    "case_count": 5,
+    "dataset_id": "phase2-sample-acceptance-v1",
+    "provenance": "Developer-reviewed questions over the public synthetic Phase 1 sample acceptance collection; contains no private company or customer material.",
+    "review_status": "developer-reviewed",
+    "schema_version": 1,
+    "sha256": "b9a2b602818497cff07f357855d48ee94f078f401460f1a307e9564bf8f9b946"
+  },
+  "embedding": {
+    "cuda_available": false,
+    "device": "cpu",
+    "dimension": 384,
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "normalized": true,
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "torch_version": "2.14.0+cpu"
+  },
+  "metrics": {
+    "answerable_case_count": 4,
+    "cases_with_missed_expected_chunks": 0,
+    "eligible_mrr": 1.0,
+    "failure_count": 0,
+    "hit_rate_at_5": 1.0,
+    "latency_ms": {
+      "count": 5,
+      "max": 164.0215,
+      "min": 27.0932,
+      "p50": 28.2739,
+      "p95": 164.0215
+    },
+    "missed_expected_chunk_count": 0,
+    "recall_at_10": 1.0,
+    "score_calibration": {
+      "interpretation": "diagnostic only; this small synthetic sample does not set a production evidence threshold",
+      "maximum_unanswerable_best_score": 0.38966333885625204,
+      "minimum_answerable_best_score": 0.6590276829102056,
+      "score_separation_observed": true
+    },
+    "slices": {
+      "availability": {
+        "answerable_count": 3,
+        "case_count": 3,
+        "failures": 0,
+        "hit_rate_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "unanswerable_candidate_cases": 0
+      },
+      "document_identity": {
+        "answerable_count": 1,
+        "case_count": 1,
+        "failures": 0,
+        "hit_rate_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "unanswerable_candidate_cases": 0
+      },
+      "multi_source": {
+        "answerable_count": 2,
+        "case_count": 2,
+        "failures": 0,
+        "hit_rate_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "unanswerable_candidate_cases": 0
+      },
+      "negation": {
+        "answerable_count": 2,
+        "case_count": 2,
+        "failures": 0,
+        "hit_rate_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "unanswerable_candidate_cases": 0
+      },
+      "number": {
+        "answerable_count": 1,
+        "case_count": 1,
+        "failures": 0,
+        "hit_rate_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "unanswerable_candidate_cases": 0
+      },
+      "single_source": {
+        "answerable_count": 1,
+        "case_count": 1,
+        "failures": 0,
+        "hit_rate_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "unanswerable_candidate_cases": 0
+      },
+      "unanswerable": {
+        "answerable_count": 0,
+        "case_count": 1,
+        "failures": 0,
+        "hit_rate_at_5": null,
+        "recall_at_10": null,
+        "unanswerable_candidate_cases": 1
+      },
+      "unsupported_detail": {
+        "answerable_count": 0,
+        "case_count": 1,
+        "failures": 0,
+        "hit_rate_at_5": null,
+        "recall_at_10": null,
+        "unanswerable_candidate_cases": 1
+      }
+    },
+    "unanswerable_case_count": 1,
+    "unanswerable_returned_candidates": 1
+  },
+  "repeat_check": {
+    "all_case_order_and_score_checks_passed": true,
+    "passed": true
+  },
+  "report_id": "phase2-retrieval-baseline-v1"
+}
