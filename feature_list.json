@@ -2,11 +2,11 @@
   "schema_version": 1,
   "updated_at": "2026-09-23",
   "coordinator_owned": true,
-  "active_phase": "phase-02-planned",
+  "active_phase": "phase-02-active",
   "phase_gate": {
     "phase-02": {
-      "status": "ready-for-explicit-activation",
-      "condition": "Phase 1 is QA PASSED, PM ACCEPTED, and promoted to main; PM/user must explicitly activate Phase 2"
+      "status": "active",
+      "condition": "Activated by user on 2026-09-23; accepted Phase 1 main baseline cb31243f410b4eab0f8c240b21622e9324d622b3"
     }
   },
   "features": [
@@ -34,8 +34,8 @@
       "description": "Define framework-neutral shared contracts and deterministic fakes before parallel implementation.",
       "owner": "Dev1",
       "dependencies": ["P1-TASK-06-08"],
-      "status": "planned-ready",
-      "evidence": "docs/phases/PHASE-02.md"
+      "status": "in-progress",
+      "evidence": "Dispatched to Dev1 from main baseline cb31243f410b4eab0f8c240b21622e9324d622b3; docs/phases/PHASE-02.md"
     },
     {
       "id": "P2-TASK-02",

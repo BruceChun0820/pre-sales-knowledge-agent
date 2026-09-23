@@ -3,9 +3,9 @@
 ## Current State
 
 - Last Updated: 2026-09-23
-- Current Objective: preserve the accepted Phase 1 baseline on `main`, then wait for explicit Phase 2 activation.
+- Current Objective: execute Phase 2 from the accepted Phase 1 baseline on `main`.
 - Accepted phase: Phase 1 — Document Ingestion + Vector DB
-- Next planned phase: Phase 2 — Basic RAG Q&A + Citation
+- Active phase: Phase 2 — Basic RAG Q&A + Citation
 - Phase 1 QA: `docs/qa/QA-001.md`, AC-P1-01 through AC-P1-17 PASS
 
 ## Completed
@@ -18,19 +18,19 @@
 
 ## Phase 2 Gate
 
-Phase 1 prerequisites are satisfied. Phase 2 is `READY FOR EXPLICIT ACTIVATION`, not automatically active. PM/user must explicitly start it and provide the accepted `main` SHA.
+Phase 1 prerequisites are satisfied. The user activated Phase 2 on 2026-09-23. Accepted baseline at dispatch: `cb31243f410b4eab0f8c240b21622e9324d622b3`.
 
 At activation:
 
-1. Create Dev1 and Dev2 task branches/worktrees from the same accepted `main` commit.
-2. Dev1 performs the contract gate; Dev2 remains read-only.
-3. After the contract PR passes QA/PM review and merges to `main`, both workers sync the exact gate commit before production edits.
-4. Each worker submits a separate remote PR directly to `main`; QA verifies the exact remote head and only PM/maintainer merges after PASS.
+1. Dev1 performs P2-TASK-01 on `feature/phase-02-contracts`; Dev2 remains read-only on its own task branch/worktree.
+2. Dev1 submits a remote PR to `main`; QA and PM review that exact commit.
+3. After the contract PR merges to `main`, Dev1 and Dev2 sync the exact gate commit before implementation.
+4. Each implementation task uses a separate remote PR directly to `main`; QA verifies the exact remote head and only PM/maintainer merges after PASS.
 
 ## Decisions
 
 - Use a coordinator pattern; workers do not spawn workers.
-- The start-of-Phase source of truth is the last accepted `main` commit.
+- The Phase 2 start-of-work baseline is `cb31243f410b4eab0f8c240b21622e9324d622b3`.
 - `main` is the only permanent branch and the target for all reviewed task PRs; Dev1/Dev2 branches are temporary.
 - Dev1 owns retrieval/evidence; Dev2 owns generation/API; QA remains independent.
 - Direct RAG precedes Agent/LangGraph, and dense retrieval precedes rewrite/rerank/hybrid experiments.
@@ -38,7 +38,7 @@ At activation:
 ## Blockers
 
 - No technical blocker is open.
-- Phase 2 work is intentionally paused until explicit activation.
+- Dev2 implementation is gated on P2-TASK-01 merging to `main`; Dev2 may only inspect and prepare until then.
 
 ## Files and Evidence
 
@@ -49,8 +49,8 @@ At activation:
 
 ## Next Session
 
-Confirm `main` is the accepted Phase 1 promotion commit. Do not create or dispatch Phase 2 worktrees until PM/user explicitly starts Phase 2.
+Dev1 completes P2-TASK-01 and opens its PR to `main`; Dev2 remains read-only until the contract PR is merged.
 
 ## Recommended Next Step
 
-Wait for Phase 2 activation. At activation, record the exact `main` SHA, create isolated Dev1/Dev2 worktrees, and execute the contract-first dispatch protocol.
+Follow the contract-first dispatch protocol in `docs/phases/PHASE-02.md`; record QA evidence and the resulting `main` SHA at each merge gate.

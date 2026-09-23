@@ -2,7 +2,7 @@
 
 售前知识与方案智能助手：一个面向企业售前团队的、可评估的 RAG + Agent 项目。项目将公开资料与自建模拟售前文档转化为可检索知识库，支持带来源的问答、历史方案检索、跨方案比较、文档总结和 Proposal 大纲辅助生成。
 
-> 当前状态：**Phase 1 — Document Ingestion + Vector DB / ACCEPTED**。AC-P1-01～17 已通过独立 QA，最终报告见 `docs/qa/QA-001.md`。Phase 2 规划与 Dev1/Dev2 handoff 已完成，但尚未开始业务实现。
+> 当前状态：**Phase 2 — Basic RAG Q&A + Citation / IN DEVELOPMENT**。Phase 1 已验收；Dev1 正在执行 P2-TASK-01 合同门禁，Dev2 当前只做只读准备。所有任务分支从最新 `main` 建立，PR 直接提交到 `main`。
 
 ## 1. 项目背景
 
@@ -131,7 +131,7 @@ Phase 1 已包含四种格式的合成样例与显式 metadata。启动 Qdrant �
 |---|---|---|
 | 0 | Documentation & Architecture | 已完成并建立 Git 基线 |
 | 1 | Document Ingestion + Vector DB | ACCEPTED；QA-001 全部通过 |
-| 2 | Basic RAG Q&A + Citation | PLANNED；等待 PM 明确启动 |
+| 2 | Basic RAG Q&A + Citation | IN DEVELOPMENT；Dev1 执行合同门禁，Dev2 只读准备 |
 | 3 | Retrieval Optimization + Reranking | 未开始 |
 | 4 | Agent Tool Calling + ReAct | 未开始 |
 | 5 | Formal Evaluation | 未开始；评测基础从 Phase 1 建立 |
@@ -164,4 +164,4 @@ Phase 1 已包含四种格式的合成样例与显式 metadata。启动 Qdrant �
 - [x] QA 已完成 Phase 1 验收，AC-P1-01～17 全部 PASS
 - [x] PM 已接受 Phase 1 并批准 promotion 至 `main`
 - [x] Phase 2 Harness、任务拆分、Dev1/Dev2 与 QA handoff 已完成
-- [ ] Phase 2 尚未获得明确启动指令
+- [x] Phase 2 已获用户授权启动；Dev1 执行 P2-TASK-01，Dev2 保持只读直到合同 PR 合并

@@ -2,15 +2,17 @@
 
 ## Current Objective
 
-- Preserve Phase 1 as the accepted stable `main` baseline.
-- Keep Phase 2 planned but inactive until explicit PM/user authorization.
+- Execute the user-authorized Phase 2 from the accepted Phase 1 `main` baseline.
+- Phase 2 starts with Dev1's contract task; Dev2 stays read-only until that PR merges.
 
 ## Current Status
 
 - Phase 1: QA PASSED and PM ACCEPTED.
 - Final QA evidence: `docs/qa/QA-001.md`.
-- Phase 2: planning complete; no business implementation started.
-- Worker branches/worktrees: not yet created for Phase 2.
+- Phase 2: ACTIVE by user authorization on 2026-09-23.
+- Dispatch baseline: `cb31243f410b4eab0f8c240b21622e9324d622b3`.
+- Dev1: P2-TASK-01 contract gate on `feature/phase-02-contracts`.
+- Dev2: read-only preparation on its dedicated task branch/worktree; no code edits until the contract merge SHA is supplied.
 
 ## Completed This Session
 
@@ -22,8 +24,7 @@
 ## Blockers / Risks
 
 - No open Phase 1 defect.
-- Do not treat `READY FOR EXPLICIT ACTIVATION` as authorization to start Phase 2.
-- Dev1/Dev2 must begin from the same accepted `main` commit and then sync the contract gate commit after it is merged to `main`, before production edits.
+- Both workers begin from the same accepted `main` baseline; after the contract PR merges, both sync the exact new `main` SHA before implementation.
 
 ## Files Changed
 
@@ -36,8 +37,8 @@
 1. Read `AGENTS.md`, `feature_list.json`, and `progress.md`.
 2. Confirm the current `main` SHA and a clean checkout.
 3. Run `./init.sh` before any implementation.
-4. If Phase 2 has not been explicitly activated, stop after status inspection.
+4. Follow the active handoff and keep Dev2 read-only before the contract merge gate.
 
 ## Recommended Next Step
 
-On explicit Phase 2 activation, create the Dev1/Dev2 task branches and worktrees from the accepted `main` SHA. Every delivery targets `main`; do not recreate or use a permanent `dev` integration branch.
+Dev1 completes P2-TASK-01 and submits a PR to `main`. After QA/PM approval and merge, record the resulting `main` SHA, release Dev1/Dev2 implementation work, and continue with the Phase 2 handoffs.
