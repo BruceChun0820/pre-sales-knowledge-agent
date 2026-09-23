@@ -27,10 +27,10 @@ This is a dependency/environment document, not a business implementation.
 | PyTorch | 2.14.0+cpu |
 | Sentence-Transformers | 5.7.0 |
 | Project environment | `.venv` |
-| Qdrant | Client configured; server not started in this task |
+| Qdrant | Pinned server image running and healthy; integration tests pass |
 | Docker Engine | 29.8.1 |
 | Docker Compose | v5.5.1 |
-| Qdrant image | Not selected or pulled; pinned image is a TASK-06 deliverable |
+| Qdrant image | qdrant/qdrant:v1.19.1 |
 
 ## Configured Dependency Groups
 
@@ -87,10 +87,10 @@ All checks below ran from the project root with `.venv/bin/python` on the Ubuntu
 | Docker daemon | AVAILABLE |
 | Ruff lint | PASS |
 | Ruff format check | PASS |
-| Pytest | 42 passed |
+| Pytest | 52 passed; includes Qdrant persistence and ingestion pipeline tests |
 | CPU embedding runtime | PASS; both pinned candidates completed with CUDA disabled |
 
-The Qdrant server image is intentionally not selected in TASK-01. TASK-06 must define and pin the image in Docker Compose before server integration begins.
+TASK-06 uses the pinned qdrant/qdrant:v1.19.1 image with a persistent named volume and localhost-only binding. The Compose health check and integration restart test pass.
 
 ## Reproduction Commands
 
